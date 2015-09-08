@@ -26,8 +26,8 @@ echo MY_USER=$USER
 # clean, just in case
 rm -rf /opt/{{ pypi_package_name }}
 # install {{ conad_dist_flavour }} into /opt
-wget -nv http://repo.continuum.io/miniconda/Miniconda-{{ conda_dist_version }}-Linux-x86_64.sh
-bash Miniconda-{{ conda_dist_version }}-Linux-x86_64.sh -b -p /opt/{{ pypi_package_name }}
+wget -nv http://repo.continuum.io/{{ conad_dist_flavour }}/{{ conad_dist_flavour_urlprefix }}-{{ conda_dist_version }}-Linux-x86_64.sh
+bash {{ conad_dist_flavour_urlprefix }}-{{ conda_dist_version }}-Linux-x86_64.sh -b -p /opt/{{ pypi_package_name }}
 # bootstrap pip
 /opt/{{ pypi_package_name }}/bin/conda install --yes pip
 # use pip to install {{ pypi_package_name }}
