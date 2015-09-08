@@ -17,3 +17,7 @@ See the file `example.yaml` for details.
 
   * conda_dist_flavour
   * conda_dist_flavour_version
+
+* Specifiy template file
+* Specify output
+* Download *.sh installer via Source0
