@@ -37,7 +37,7 @@ bash {{ conda_dist_flavour_urlprefix }}-{{ conda_dist_version }}-Linux-x86_64.sh
 # create /opt/{{ pypi_package_name }} in buildroot
 mkdir -p %{buildroot}/opt/{{ pypi_package_name }}
 # copy the built {{ conda_dist_flavour }} env into the buildroot
-cp -r /opt/moto %{buildroot}/opt
+cp -r /opt/{{ pypi_package_name }} %{buildroot}/opt
 ls %{buildroot}/opt/{{ pypi_package_name }}
 # create a /usr/bin
 install -m 755 -d %{buildroot}/usr/bin
