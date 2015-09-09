@@ -37,7 +37,7 @@ def fail(message, exit_code=1):
 
 # Arguments for the template
 # None means no default, anything else is the default
-defaults = {
+DEFAULTS = {
     'pypi_package_name':            None,
     'pypi_package_version':         None,
     'conda_dist_flavour':           'miniconda',
@@ -52,7 +52,8 @@ class TemplateNoteFoundException(Exception):
     pass
 
 
-def update_loaded(loaded_yaml):
+def update_loaded(defaults, loaded_yaml):
+    """ Update loaded_yaml with values and keys from defaults. """
     for key, value in defaults.items():
         if key not in loaded_yaml:
             loaded_yaml[key] = value
