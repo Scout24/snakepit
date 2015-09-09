@@ -19,5 +19,6 @@ See the file `example.yaml` for details.
 * Install optional dependencies, e.g. `ipython[all]`
 * What if we want to install conda packages?
 * What if we have a complex dependency chain
+* What if we want to install multiple products
 * What about additional spec-file metadata, e.g. licence?
 * What about the illegibility of the spec file template
