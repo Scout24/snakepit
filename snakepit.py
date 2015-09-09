@@ -30,6 +30,12 @@ arguments = {
 }
 
 
+def update_arguments(loaded_yaml):
+    for key, value in arguments.items():
+        if key not in loaded_yaml:
+            loaded_yaml[key] = loaded_yaml
+
+
 def add_conda_dist_flavour_prefix(loaded_yaml):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
