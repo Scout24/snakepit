@@ -17,6 +17,8 @@ import yaml
 from jinja2 import Template
 
 
+# Arguments for the template
+# None means no default, anything else is the default
 arguments = {
     'pypi_package_name':            None,
     'pypi_package_version':         None,
