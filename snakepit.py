@@ -61,6 +61,12 @@ def add_conda_dist_flavour_prefix(loaded_yaml):
 
 
 def locate_template():
+    """ Find the template file.
+
+    Look for it in the current working directory, then in the directory where
+    this file is located and fail otherwise.
+
+    """
     if osp.isfile(TEMPLATE_FILENAME):
         return TEMPLATE_FILENAME
     else:
