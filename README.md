@@ -22,3 +22,15 @@ See the file `example.yaml` for details.
 * What if we want to install multiple products
 * What about additional spec-file metadata, e.g. licence?
 * What about the illegibility of the spec file template
+* Add a `--release` switch to modify the release number
+* Decouple from make-opt-writable
+* Decouple svn2rpm
+* Consider "snakepyt" as name
+* If no file specified, it should look for a `snakepit.yaml` or `.snakepit.yaml`
+* `--pre` and `--post` hooks for the spec file
+* Fixup the package summary from metadata on pypi
+* Fixup the package description from metadata on pypi
+* Release number should be: XX-miniconda.-pythonA.B
+* Augment the description with complete metadata
+* Automagically determine the symlinks. (either by doing deltas during install,
+  or by inspecting the metadata.)
