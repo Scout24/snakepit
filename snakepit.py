@@ -17,6 +17,17 @@ import yaml
 from jinja2 import Template
 
 
+arguments = {
+    'pypi_package_name':            None,
+    'pypi_package_version':         None,
+    'conda_dist_flavour':           'miniconda',
+    'conda_dist_flavour_version':   '',
+    'conda_dist_version':           '3.9.1',
+    'extra_pip_args':               '',
+    'symlinks':                     [],
+}
+
+
 def add_conda_dist_flavour_prefix(loaded_yaml):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
