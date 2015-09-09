@@ -19,7 +19,7 @@ from jinja2 import Template
 
 # Arguments for the template
 # None means no default, anything else is the default
-arguments = {
+defaults = {
     'pypi_package_name':            None,
     'pypi_package_version':         None,
     'conda_dist_flavour':           'miniconda',
@@ -30,10 +30,10 @@ arguments = {
 }
 
 
-def update_arguments(loaded_yaml):
-    for key, value in arguments.items():
+def update_loaded(loaded_yaml):
+    for key, value in defaults.items():
         if key not in loaded_yaml:
-            loaded_yaml[key] = loaded_yaml
+            loaded_yaml[key] = value
 
 
 def add_conda_dist_flavour_prefix(loaded_yaml):
@@ -57,6 +57,7 @@ if __name__ == '__main__':
     with open('TEMPLATE.spec') as fp:
         loaded_template = fp.read()
 
+    update_loaded(loaded_yaml)
     add_conda_dist_flavour_prefix(loaded_yaml)
     template = Template(loaded_template)
     print template.render(**loaded_yaml)
