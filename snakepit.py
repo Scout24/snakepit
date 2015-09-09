@@ -13,6 +13,8 @@ Options:
 
 """
 
+from __future__ import print_function, division
+
 import os.path as osp
 import sys
 
@@ -21,6 +23,17 @@ import yaml
 from jinja2 import Template
 
 TEMPLATE_FILENAME = 'TEMPLATE.spec'
+DEBUG = False
+
+
+def print_debug(message):
+    if DEBUG:
+        print(message)
+
+
+def fail(message, exit_code=1):
+    print(message)
+    sys.exit(exit_code)
 
 # Arguments for the template
 # None means no default, anything else is the default
@@ -84,8 +97,7 @@ if __name__ == '__main__':
     try:
         template_location = locate_template()
     except TemplateNoteFoundException:
-        print "Template not found!"
-        sys.exit(1)
+        fail("Template not found!", exit_code=2)
     else:
         with open(template_location) as fp:
             loaded_template = fp.read()
@@ -93,4 +105,4 @@ if __name__ == '__main__':
     update_loaded(loaded_yaml)
     add_conda_dist_flavour_prefix(loaded_yaml)
     template = Template(loaded_template)
-    print template.render(**loaded_yaml)
+    print(template.render(**loaded_yaml))
