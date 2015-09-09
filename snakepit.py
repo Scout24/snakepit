@@ -104,6 +104,6 @@ if __name__ == '__main__':
             loaded_template = fp.read()
 
     update_loaded(loaded_yaml)
-    add_conda_dist_flavour_prefix(loaded_yaml)
+    add_conda_dist_flavour_prefix(DEFAULTS, loaded_yaml)
     template = Template(loaded_template)
     print(template.render(**loaded_yaml))
