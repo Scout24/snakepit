@@ -13,11 +13,11 @@ See the file `example.yaml` for details.
 
 * Include git-hash of snakepit in spec
 * Include version number of conda-dist
-* For Python 3 we need:
-
-  * conda_dist_flavour
-  * conda_dist_flavour_version
-
 * Specifiy template file
 * Specify output
-* Download *.sh installer via Source0
+* Download .sh installer via Source0
+* Install optional dependencies, e.g. `ipython[all]`
+* What if we want to install conda packages?
+* What if we have a complex dependency chain
+* What about additional spec-file metadata, e.g. licence?
+* What about the illegibility of the spec file template
