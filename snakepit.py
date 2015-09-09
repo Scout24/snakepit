@@ -12,10 +12,15 @@ Options:
   --version     Show version.
 
 """
+
+import os.path as osp
+import sys
+
 from docopt import docopt
 import yaml
 from jinja2 import Template
 
+TEMPLATE_FILENAME = 'TEMPLATE.spec'
 
 # Arguments for the template
 # None means no default, anything else is the default
@@ -28,6 +33,10 @@ defaults = {
     'extra_pip_args':               '',
     'symlinks':                     [],
 }
+
+
+class TemplateNoteFoundException(Exception):
+    pass
 
 
 def update_loaded(loaded_yaml):
@@ -51,12 +60,29 @@ def add_conda_dist_flavour_prefix(loaded_yaml):
     loaded_yaml['conda_dist_flavour_urlprefix'] = x[0].upper() + x[1:]
 
 
+def locate_template():
+    if osp.isfile(TEMPLATE_FILENAME):
+        return TEMPLATE_FILENAME
+    else:
+        location = osp.join(osp.dirname(osp.abspath(__file__)),
+                            TEMPLATE_FILENAME)
+        if not osp.isfile(location):
+            raise TemplateNoteFoundException()
+        else:
+            return location
+
 if __name__ == '__main__':
     arguments = docopt(__doc__)
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
-    with open('TEMPLATE.spec') as fp:
-        loaded_template = fp.read()
+    try:
+        template_location = locate_template()
+    except TemplateNoteFoundException:
+        print "Template not found!"
+        sys.exit(1)
+    else:
+        with open(template_location) as fp:
+            loaded_template = fp.read()
 
     update_loaded(loaded_yaml)
     add_conda_dist_flavour_prefix(loaded_yaml)
