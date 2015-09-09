@@ -47,7 +47,7 @@ def add_conda_dist_flavour_prefix(loaded_yaml):
     our dictionary so that we can use it in the template.
 
     """
-    x = loaded_yaml['conad_dist_flavour']
+    x = loaded_yaml['conda_dist_flavour']
     loaded_yaml['conda_dist_flavour_urlprefix'] = x[0].upper() + x[1:]
 
 if __name__ == '__main__':
