@@ -23,7 +23,7 @@ echo MY_USER=$USER
 # clean, just in case
 rm -rf /opt/{{ pypi_package_name }}
 # install {{ conda_dist_flavour }} into /opt
-wget -nv http://repo.continuum.io/{{ conda_dist_flavour }}/{{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-x86_64.sh
+wget -nv http://repo.continuum.io/{{ conda_dist_flavour }}/{{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-%{_build_arch}.sh
 bash {{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-x86_64.sh -b -p /opt/{{ pypi_package_name }}
 # bootstrap pip
 /opt/{{ pypi_package_name }}/bin/conda install --yes pip
