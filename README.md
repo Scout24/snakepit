@@ -24,6 +24,10 @@ For more information on options:
 $ snakepit -h
 ```
 
+# Building
+
+Use pybuilder: http://pybuilder.github.io/
+
 # Status
 
 This tool is in an early alpha stage and the output is guaranteed to change.
