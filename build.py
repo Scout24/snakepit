@@ -11,7 +11,7 @@ use_plugin('python.cram')
 
 name = "snakepit"
 default_task = "publish"
-version = VCSRevision().get_git_revision_count() + ".0.0"
+version = VCSRevision().get_git_revision_count()
 summary = "Package Python software as an RPM including all dependencies " \
           "(even the interpreter)."
 
