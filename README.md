@@ -24,7 +24,18 @@ For more information on options:
 $ snakepit -h
 ```
 
-# Building
+## Building the resulting `*.spec` files.
+
+The resulting spec file requires the `make-opt-writable` rpm which you can
+build using the `make-opt-writable.spec` (included in repository) file. This is
+required due to very low-level reasons related to the way in which miniconda
+is installed.
+
+Furthermore, the spec file is of a special flavour of `svn2rpm` which can be
+found at: https://github.com/immobilienscout24/svn2rpm/. You may not yet be
+able to use the spec files w/o this tool and the surrounding boilerplate.
+
+# Development
 
 Use pybuilder: http://pybuilder.github.io/
 
