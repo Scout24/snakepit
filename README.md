@@ -49,7 +49,7 @@ follows:
 
 * Install anaconda/miniconda to `/opt/mypackage`
 * Install the product into that installtion using `pip`
-* Setup any symlinks from `/opt/mypackag` to `/usr/bin`
+* Setup any symlinks from `/opt/mypackage/bin` to `/usr/bin`
 * Copy the whole installation into the buildroot
 
 ## Development
