@@ -1,4 +1,5 @@
 from pybuilder.core import use_plugin, init
+from pybuilder.vcs import VCSRevision
 
 use_plugin("python.core")
 use_plugin("python.unittest")
@@ -10,7 +11,7 @@ use_plugin('python.cram')
 
 name = "snakepit"
 default_task = "publish"
-version = '0.0.2.dev0'
+version = '0.0.2.dev' + VCSRevision().get_git_revision_count()
 
 
 @init
