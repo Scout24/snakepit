@@ -76,4 +76,7 @@
    '--help': False,
    '--version': False,
    '<file>': 'snakepit.yaml'}
+  Looking for template in '.*' (re)
+  Looking for template in '.*/src/main/python/snakepit/TEMPLATE.spec' (re)
+  Template found
   Writing output to: 'moto.spec'

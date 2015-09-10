@@ -2,6 +2,7 @@
 
 from __future__ import print_function, division
 
+import os
 import os.path as osp
 import sys
 
@@ -72,14 +73,18 @@ def locate_template():
     this file is located and fail otherwise.
 
     """
+    print_debug("Looking for template in '{0}'".format(os.getcwd()))
     if osp.isfile(TEMPLATE_FILENAME):
+        print_debug("Template found")
         return TEMPLATE_FILENAME
     else:
         location = osp.join(osp.dirname(osp.abspath(__file__)),
                             TEMPLATE_FILENAME)
+        print_debug("Looking for template in '{0}'".format(location))
         if not osp.isfile(location):
             raise TemplateNoteFoundException()
         else:
+            print_debug("Template found")
             return location
 
 
