@@ -55,6 +55,10 @@ will create a spec file. The spec file works as follows:
 
 Use pybuilder: http://pybuilder.github.io/
 
+## Getting in touch
+
+Please use the conda mailinglist at: https://groups.google.com/a/continuum.io/forum/#!forum/conda
+
 ## Status
 
 This tool is in an early alpha stage and the output is guaranteed to change.
