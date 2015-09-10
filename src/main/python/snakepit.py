@@ -78,6 +78,10 @@ def locate_template():
             return location
 
 
+def default_output_filename(loaded_yaml):
+    return "{0}.spec".format(loaded_yaml['pypi_package_name'])
+
+
 def main(arguments):
 
     with open(arguments['<file>']) as fp:
@@ -93,4 +97,6 @@ def main(arguments):
     update_loaded(DEFAULTS, loaded_yaml)
     add_conda_dist_flavour_prefix(loaded_yaml)
     template = Template(loaded_template)
-    print(template.render(**loaded_yaml))
+
+    with open(default_output_filename(loaded_yaml), 'w') as fp:
+        fp.write(template.render(**loaded_yaml))
