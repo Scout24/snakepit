@@ -46,10 +46,10 @@ able to use the spec files w/o this tool and the surrounding boilerplate.
 For a given product to build an RPM for, let' call it `mypackage`, `snakepit`
 will create a spec file. The spec file works as follows:
 
-    * Install anaconda/miniconda to `/opt/mypackage`
-    * Install the product into that installtion using `pip`
-    * Setup any symlinks from `/opt/mypackag` to `/usr/bin`
-    * Copy the whole installation into the buildroot
+* Install anaconda/miniconda to `/opt/mypackage`
+* Install the product into that installtion using `pip`
+* Setup any symlinks from `/opt/mypackag` to `/usr/bin`
+* Copy the whole installation into the buildroot
 
 ## Development
 
