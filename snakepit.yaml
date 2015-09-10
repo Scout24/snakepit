@@ -1,3 +1,6 @@
+# Name of the top-level product
 pypi_package_name:    moto
+# Which version to use
 pypi_package_version: 0.3.1
+# Any entry-points that should be symlinked
 symlinks:             ['moto_server']
