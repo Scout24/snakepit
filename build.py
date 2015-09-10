@@ -20,3 +20,4 @@ def set_properties(project):
     project.depends_on("jinja2")
     project.depends_on("pyyaml")
     project.depends_on("docopt")
+    project.include_file('snakepit', 'TEMPLATE.spec')
