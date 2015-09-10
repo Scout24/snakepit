@@ -108,9 +108,10 @@ def main(arguments):
     template = Template(loaded_template)
 
     output_filename = default_output_filename(loaded_yaml)
-    if osp.isfile(output_filename):
+    if osp.isfile(output_filename) and not arguments['--force']:
         fail("File: '{0}' exists already, use --force to overwrite".
              format(output_filename), exit_code=3)
     else:
+        print_debug("Writing output to: '{0}'".format(output_filename))
         with open(output_filename, 'w') as fp:
             fp.write(template.render(**loaded_yaml))
