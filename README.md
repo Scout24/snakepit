@@ -63,7 +63,9 @@ Please use the conda mailinglist at: https://groups.google.com/a/continuum.io/fo
 ## Status
 
 This tool is in an early alpha stage and the output is guaranteed to change.
-Feedback, comments and pull-requests welcome.
+Feedback, comments and pull-requests welcome, but please do bear in mind that,
+this is work in progress and therefore probably full of many, many horrible
+bugs.
 
 ## Licence
 
