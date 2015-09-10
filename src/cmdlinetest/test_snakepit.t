@@ -62,3 +62,13 @@
 
   $ snakepit --force snakepit.yaml
   $ snakepit -f snakepit.yaml
+
+# now double check with --debug
+
+  $ snakepit --force --debug snakepit.yaml
+  {'--debug': True,
+   '--force': True,
+   '--help': False,
+   '--version': False,
+   '<file>': 'snakepit.yaml'}
+  Writing output to: 'moto.spec'
