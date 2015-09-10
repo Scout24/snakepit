@@ -3,7 +3,7 @@
 ## Description
 
 Package Python software as an RPM including all dependencies (even the
-interpreter) and miniconda/anaconda as base.
+interpreter).
 
 This solves the problem of an outdated Python (2.6) on RHEL since we can now
 deploy self-contained RPMs that are independent.
