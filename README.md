@@ -123,3 +123,4 @@ specific language governing permissions and limitations under the License.
 * Search for an existing `snakepit.yaml` in the current working directory.
 * Change package name from `product`-`conda-dist` to something the user can
   select.
+* Figure out how to get the cram-plugin to write coverge data too
