@@ -1,4 +1,4 @@
-from pybuilder.core import use_plugin, init
+from pybuilder.core import use_plugin, init, Author
 from pybuilder.vcs import VCSRevision
 
 use_plugin("python.core")
@@ -14,6 +14,9 @@ default_task = "publish"
 version = VCSRevision().get_git_revision_count()
 summary = "Package Python software as an RPM including all dependencies " \
           "(even the interpreter)."
+authors = [Author('Valentin Haenel', 'valentin@haenel.co')]
+license = 'Apache'
+url = 'https://github.com/ImmobilienScout24/snakepit'
 
 
 @init
