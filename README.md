@@ -10,6 +10,20 @@ interpreter) and miniconda/anaconda as base.
 See the file `snakepit.yaml` for details on how to build a spec file for
 `moto`.
 
+You can then:
+
+```
+$ snakepit snakepit.yaml
+```
+
+Which will produce a `moto.spec` file.
+
+For more information on options:
+
+```
+$ snakepit -h
+```
+
 # Licence
 
 Copyright 2015 Immobilienscout24 GmbH
