@@ -5,6 +5,12 @@
 Package Python software as an RPM including all dependencies (even the
 interpreter) and miniconda/anaconda as base.
 
+This solves the problem of an outdated Python (2.6) on RHEL since we can now
+deploy self-contained RPMs that are independent.
+
+The source of truth for the software to be installed is the Python package
+index at: https://pypi.python.org/pypi
+
 ## Example
 
 See the file `snakepit.yaml` for details on how to build a spec file for
