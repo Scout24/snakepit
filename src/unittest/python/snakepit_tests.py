@@ -7,6 +7,7 @@ from snakepit import (update_loaded,
                       locate_template,
                       TEMPLATE_FILENAME,
                       TemplateNoteFoundException,
+                      default_output_filename,
                       )
 
 
@@ -39,4 +40,9 @@ class TestSnakepit(unittest.TestCase):
     def test_locate_template_finds_file_near_module(self, isfile_mock):
         isfile_mock.side_effect = [False, True]
         self.assertEquals('expected', locate_template())
+
+    def test_default_output_filename(self):
+        self.assertEquals('mypackage.spec',
+                          default_output_filename(
+                              {'pypi_package_name': 'mypackage'}))
 
