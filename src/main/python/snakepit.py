@@ -1,24 +1,10 @@
 #!/usr/bin/env python
 
-"""snakepit
-
-Usage:
-  snakepit <file>
-  snakepit (-h | --help)
-  snakepit --version
-
-Options:
-  -h --help     Show this screen.
-  --version     Show version.
-
-"""
-
 from __future__ import print_function, division
 
 import os.path as osp
 import sys
 
-from docopt import docopt
 import yaml
 from jinja2 import Template
 
@@ -91,8 +77,9 @@ def locate_template():
         else:
             return location
 
-if __name__ == '__main__':
-    arguments = docopt(__doc__)
+
+def main(arguments):
+
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
     try:
