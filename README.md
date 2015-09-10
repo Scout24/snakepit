@@ -52,6 +52,16 @@ follows:
 * Setup any symlinks from `/opt/mypackage/bin` to `/usr/bin`
 * Copy the whole installation into the buildroot
 
+## Installation
+
+It is available from PyPi: https://pypi.python.org/pypi/snakepit
+
+To install:
+
+```
+pip install snakepit
+```
+
 ## Development
 
 Use pybuilder: http://pybuilder.github.io/
