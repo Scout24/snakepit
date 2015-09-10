@@ -58,4 +58,7 @@
   File: 'moto.spec' exists already, use --force to overwrite
   [3]
 
+# now use the force switch
 
+  $ snakepit --force snakepit.yaml
+  $ snakepit -f snakepit.yaml
