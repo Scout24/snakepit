@@ -4,13 +4,15 @@
 """snakepit
 
 Usage:
-  snakepit <file>
+  snakepit [--debug] [(-f | --force)]<file>
   snakepit (-h | --help)
   snakepit --version
 
 Options:
   -h --help     Show this screen.
   --version     Show version.
+  --debug       Enable debug output.
+  -f, --force   Force overwrite of output.
 
 """
 

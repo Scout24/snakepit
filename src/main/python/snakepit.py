@@ -88,6 +88,10 @@ def default_output_filename(loaded_yaml):
 
 
 def main(arguments):
+    global DEBUG
+    if arguments['--debug']:
+        DEBUG = True
+    print_debug(arguments)
 
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)

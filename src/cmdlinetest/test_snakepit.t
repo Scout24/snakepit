@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit <file>
+    snakepit [--debug] [(-f | --force)]<file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -21,25 +21,29 @@
   snakepit
   
   Usage:
-    snakepit <file>
+    snakepit [--debug] [(-f | --force)]<file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
     -h --help     Show this screen.
     --version     Show version.
+    --debug       Enable debug output.
+    -f, --force   Force overwrite of output.
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit <file>
+    snakepit [--debug] [(-f | --force)]<file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
     -h --help     Show this screen.
     --version     Show version.
+    --debug       Enable debug output.
+    -f, --force   Force overwrite of output.
 
 # test generating file
 
