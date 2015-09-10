@@ -41,6 +41,16 @@ Furthermore, the spec file is of a special flavour of `svn2rpm` which can be
 found at: https://github.com/immobilienscout24/svn2rpm/. You may not yet be
 able to use the spec files w/o this tool and the surrounding boilerplate.
 
+# How does it work?
+
+For a given product to build an RPM for, let' call it `mypackage`, `snakepit`
+will create a spec file. The spec file works as follows:
+
+    * Install anaconda/miniconda to `/opt/mypackage`
+    * Install the product into that installtion using `pip`
+    * Setup any symlinks from `/opt/mypackag` to `/usr/bin`
+    * Copy the whole installation into the buildroot
+
 ## Development
 
 Use pybuilder: http://pybuilder.github.io/
