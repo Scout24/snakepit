@@ -2,7 +2,6 @@
 
 from __future__ import print_function, division
 
-import os
 import os.path as osp
 import sys
 import pkg_resources
@@ -37,8 +36,7 @@ DEFAULTS = {
 
 
 # command line errors
-template_not_found = 2
-output_file_exists = 3
+output_file_exists = 2
 
 
 class TemplateNoteFoundException(Exception):
@@ -89,7 +87,7 @@ def main(arguments):
     rendered_template = template.render(**loaded_yaml)
     if osp.isfile(output_filename) and not arguments['--force']:
         fail("File: '{0}' exists already, use --force to overwrite".
-             format(output_filename), exit_code=3)
+             format(output_filename), exit_code=output_file_exists)
     else:
         print_debug("Writing output to: '{0}'".format(output_filename))
         with open(output_filename, 'w') as fp:

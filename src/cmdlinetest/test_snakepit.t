@@ -61,7 +61,7 @@
 
   $ snakepit snakepit.yaml
   File: 'moto.spec' exists already, use --force to overwrite
-  [3]
+  [2]
 
 # now use the force switch
 
