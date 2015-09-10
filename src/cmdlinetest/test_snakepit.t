@@ -15,6 +15,11 @@
     snakepit --version
   [1]
 
+# check the version, yo!
+
+  $ snakepit --version
+  alpha
+
 # test help
 
   $ snakepit -h
