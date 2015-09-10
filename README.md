@@ -24,6 +24,11 @@ For more information on options:
 $ snakepit -h
 ```
 
+# Status
+
+This tool is in an early alpha stage and the output is guaranteed to change.
+Feedback, comments and pull-requests welcome.
+
 # Licence
 
 Copyright 2015 Immobilienscout24 GmbH
