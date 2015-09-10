@@ -35,16 +35,16 @@ Furthermore, the spec file is of a special flavour of `svn2rpm` which can be
 found at: https://github.com/immobilienscout24/svn2rpm/. You may not yet be
 able to use the spec files w/o this tool and the surrounding boilerplate.
 
-# Development
+## Development
 
 Use pybuilder: http://pybuilder.github.io/
 
-# Status
+## Status
 
 This tool is in an early alpha stage and the output is guaranteed to change.
 Feedback, comments and pull-requests welcome.
 
-# Licence
+## Licence
 
 Copyright 2015 Immobilienscout24 GmbH
 
