@@ -43,8 +43,8 @@ specific language governing permissions and limitations under the License.
 
 * Include git-hash of snakepit in spec
 * Include version number of conda-dist
-* Specifiy template file
-* Specify output
+* Specifiy template file via `--template`
+* Specify output via `--output`
 * Download .sh installer via Source0
 * Install optional dependencies, e.g. `ipython[all]`
 * What if we want to install conda packages?
