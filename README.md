@@ -109,3 +109,5 @@ specific language governing permissions and limitations under the License.
 * Ability to package additional things, such as bash completions, cron-jobs and
   so on.
 * Search for an existing `snakepit.yaml` in the current working directory.
+* Change package name from `product`-`conda-dist` to something the user can
+  select.
