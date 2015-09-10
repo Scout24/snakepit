@@ -34,6 +34,11 @@ DEFAULTS = {
 }
 
 
+# command line errors
+template_not_found = 2
+output_file_exists = 3
+
+
 class TemplateNoteFoundException(Exception):
     pass
 
@@ -89,7 +94,7 @@ def main(arguments):
     try:
         template_location = locate_template()
     except TemplateNoteFoundException:
-        fail("Template not found!", exit_code=2)
+        fail("Template not found!", exit_code=template_not_found)
     else:
         with open(template_location) as fp:
             loaded_template = fp.read()
@@ -98,5 +103,10 @@ def main(arguments):
     add_conda_dist_flavour_prefix(loaded_yaml)
     template = Template(loaded_template)
 
-    with open(default_output_filename(loaded_yaml), 'w') as fp:
-        fp.write(template.render(**loaded_yaml))
+    output_filename = default_output_filename(loaded_yaml)
+    if osp.isfile(output_filename):
+        fail("File: '{0}' exists already, use --force to overwrite".
+             format(output_filename), exit_code=3)
+    else:
+        with open(output_filename, 'w') as fp:
+            fp.write(template.render(**loaded_yaml))

@@ -8,7 +8,6 @@ use_plugin("python.coverage")
 use_plugin("python.distutils")
 use_plugin('python.cram')
 
-
 name = "snakepit"
 default_task = "publish"
 
