@@ -7,7 +7,8 @@ interpreter) and miniconda/anaconda as base.
 
 ## Example
 
-See the file `example.yaml` for details.
+See the file `snakepit.yaml` for details on how to build a spec file for
+`moto`.
 
 # Licence
 
