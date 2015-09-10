@@ -10,6 +10,7 @@ use_plugin('python.cram')
 
 name = "snakepit"
 default_task = "publish"
+version = '0.0.2.dev0'
 
 
 @init
