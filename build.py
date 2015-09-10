@@ -27,3 +27,16 @@ def set_properties(project):
     project.depends_on("pyyaml")
     project.depends_on("docopt")
     project.include_file('snakepit', 'TEMPLATE.spec')
+    project.set_property('distutils_classifiers', [
+        'Development Status :: 2 - Pre-Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
+        'Operating System :: POSIX :: Linux'
+        'Topic :: System :: Software Distribution',
+        'Topic :: System :: Systems Administration',
+        'Topic :: System :: Archiving :: Packaging',
+        'Topic :: Utilities',
+    ])
