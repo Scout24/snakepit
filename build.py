@@ -17,3 +17,4 @@ def set_properties(project):
     project.set_property('install_dependencies_upgrade', True)
     project.depends_on("jinja2")
     project.depends_on("pyyaml")
+    project.depends_on("docopt")
