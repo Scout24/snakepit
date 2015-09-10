@@ -34,3 +34,9 @@ class TestSnakepit(unittest.TestCase):
     def test_locate_template_raises_exception_if_file_not_found(self):
         self.assertRaises(TemplateNoteFoundException, locate_template)
 
+    @patch('snakepit.osp.isfile')
+    @patch('snakepit.osp.join', Mock(return_value='expected'))
+    def test_locate_template_finds_file_near_module(self, isfile_mock):
+        isfile_mock.side_effect = [False, True]
+        self.assertEquals('expected', locate_template())
+
