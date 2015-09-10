@@ -5,6 +5,7 @@ from __future__ import print_function, division
 import os
 import os.path as osp
 import sys
+import pkg_resources
 
 import yaml
 from jinja2 import Template
@@ -66,28 +67,6 @@ def add_conda_dist_flavour_prefix(loaded_yaml):
     loaded_yaml['conda_dist_flavour_urlprefix'] = x[0].upper() + x[1:]
 
 
-def locate_template():
-    """ Find the template file.
-
-    Look for it in the current working directory, then in the directory where
-    this file is located and fail otherwise.
-
-    """
-    print_debug("Looking for template in '{0}'".format(os.getcwd()))
-    if osp.isfile(TEMPLATE_FILENAME):
-        print_debug("Template found")
-        return TEMPLATE_FILENAME
-    else:
-        location = osp.join(osp.dirname(osp.abspath(__file__)),
-                            TEMPLATE_FILENAME)
-        print_debug("Looking for template in '{0}'".format(location))
-        if not osp.isfile(location):
-            raise TemplateNoteFoundException()
-        else:
-            print_debug("Template found")
-            return location
-
-
 def default_output_filename(loaded_yaml):
     return "{0}.spec".format(loaded_yaml['pypi_package_name'])
 
@@ -100,17 +79,11 @@ def main(arguments):
 
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
-    try:
-        template_location = locate_template()
-    except TemplateNoteFoundException:
-        fail("Template not found!", exit_code=template_not_found)
-    else:
-        with open(template_location) as fp:
-            loaded_template = fp.read()
 
     update_loaded(DEFAULTS, loaded_yaml)
     add_conda_dist_flavour_prefix(loaded_yaml)
-    template = Template(loaded_template)
+    template = Template(pkg_resources.resource_string('snakepit',
+                                                      TEMPLATE_FILENAME))
 
     output_filename = default_output_filename(loaded_yaml)
     rendered_template = template.render(**loaded_yaml)
