@@ -84,8 +84,9 @@ specific language governing permissions and limitations under the License.
 
 * Include git-hash of snakepit in spec
 * Include version number of conda-dist
-* Specifiy template file via `--template`
+* Specify template file via `--template`
 * Specify output via `--output`
+* Allow outputing the spec file on stdout using `--stdout`
 * Download .sh installer via Source0
 * Install optional dependencies, e.g. `ipython[all]`
 * What if we want to install conda packages?
@@ -105,3 +106,6 @@ specific language governing permissions and limitations under the License.
 * Augment the description with complete metadata
 * Automagically determine the symlinks. (either by doing deltas during install,
   or by inspecting the metadata.)
+* Ability to package additional things, such as bash completions, cron-jobs and
+  so on.
+* Search for an existing `snakepit.yaml` in the current working directory.
