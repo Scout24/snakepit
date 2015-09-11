@@ -127,3 +127,4 @@ specific language governing permissions and limitations under the License.
 * Maybe we can delete things from the miniconda install that are not required
   since it is now static. E.g. stuff in `pkg`. This would help to reduce the
   size of the final RPM.
+* Consider https://github.com/pyinstaller/pyinstaller as an alternative
