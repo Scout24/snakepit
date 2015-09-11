@@ -29,6 +29,8 @@ bash {{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda
 /opt/{{ pypi_package_name }}/bin/conda install --yes pip
 # use pip to install {{ pypi_package_name }}
 /opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} {{ pypi_package_name }}=={{ pypi_package_version }}
+# cleanup the conda install a little
+/opt/{{ pypi_package_name }}/bin/conda --tarballs --packages --yes
 
 %install
 # create /opt/{{ pypi_package_name }} in buildroot
