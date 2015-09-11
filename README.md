@@ -128,3 +128,9 @@ specific language governing permissions and limitations under the License.
   since it is now static. E.g. stuff in `pkg`. This would help to reduce the
   size of the final RPM.
 * Consider https://github.com/pyinstaller/pyinstaller as an alternative
+* Delete pip and conda after installing everything to remove the temptation to
+  install things as root on the box. In fact, perhaps make a 'debug' yaml flag
+  that allows to craete such packages.
+* In case we want to install c-extensions, we may need to add c-compiler and
+  other things.
+
