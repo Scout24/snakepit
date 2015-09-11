@@ -56,10 +56,10 @@ follows:
 
 It is available from PyPi: https://pypi.python.org/pypi/snakepit
 
-To install:
+To install, do:
 
 ```
-pip install snakepit
+$ pip install snakepit
 ```
 
 ## Development
