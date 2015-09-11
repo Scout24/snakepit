@@ -41,7 +41,7 @@ Furthermore, the spec file is of a special flavour of `svn2rpm` which can be
 found at: https://github.com/immobilienscout24/svn2rpm/. You may not yet be
 able to use the spec files w/o this tool and the surrounding boilerplate.
 
-# How does it work?
+## How does it work?
 
 For a given product to build an RPM for---let's call it
 `mypackage`---`snakepit` will create a spec file. The spec file works as
