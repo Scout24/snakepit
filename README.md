@@ -124,3 +124,6 @@ specific language governing permissions and limitations under the License.
 * Change package name from `product`-`conda-dist` to something the user can
   select.
 * Figure out how to get the cram-plugin to write coverge data too
+* Maybe we can delete things from the miniconda install that are not required
+  since it is now static. E.g. stuff in `pkg`. This would help to reduce the
+  size of the final RPM.
