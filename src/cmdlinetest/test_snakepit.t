@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [(-f | --force)]<file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,29 +26,31 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [(-f | --force)]<file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help     Show this screen.
-    --version     Show version.
-    --debug       Enable debug output.
-    -f, --force   Force overwrite of output.
+    -h --help        Show this screen.
+    --version        Show version.
+    --debug          Enable debug output.
+    --build=<build>  The build number [default: 0]
+    -f, --force      Force overwrite of output.
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [(-f | --force)]<file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help     Show this screen.
-    --version     Show version.
-    --debug       Enable debug output.
-    -f, --force   Force overwrite of output.
+    -h --help        Show this screen.
+    --version        Show version.
+    --debug          Enable debug output.
+    --build=<build>  The build number [default: 0]
+    -f, --force      Force overwrite of output.
 
 # test generating file
 
@@ -71,7 +73,8 @@
 # now double check with --debug
 
   $ snakepit --force --debug snakepit.yaml
-  {'--debug': True,
+  {'--build': '0',
+   '--debug': True,
    '--force': True,
    '--help': False,
    '--version': False,

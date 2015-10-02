@@ -4,15 +4,16 @@
 """snakepit
 
 Usage:
-  snakepit [--debug] [(-f | --force)] <file>
+  snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
   snakepit (-h | --help)
   snakepit --version
 
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
-  --debug       Enable debug output.
-  -f, --force   Force overwrite of output.
+  -h --help        Show this screen.
+  --version        Show version.
+  --debug          Enable debug output.
+  --build=<build>  The build number [default: 0]
+  -f, --force      Force overwrite of output.
 
 """
 
