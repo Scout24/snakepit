@@ -43,7 +43,7 @@ class TemplateNoteFoundException(Exception):
     pass
 
 
-def add_conda_dist_flavour_prefix(loaded_yaml):
+def add_conda_dist_flavour_prefix(yaml_spec):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
     The files from Continuum at:
@@ -54,12 +54,12 @@ def add_conda_dist_flavour_prefix(loaded_yaml):
     our dictionary so that we can use it in the template.
 
     """
-    x = loaded_yaml['conda_dist_flavour']
-    loaded_yaml['conda_dist_flavour_urlprefix'] = x[0].upper() + x[1:]
+    x = yaml_spec['conda_dist_flavour']
+    yaml_spec['conda_dist_flavour_urlprefix'] = x[0].upper() + x[1:]
 
 
-def default_output_filename(loaded_yaml):
-    return "{0}.spec".format(loaded_yaml['pypi_package_name'])
+def default_output_filename(yaml_spec):
+    return "{0}.spec".format(yaml_spec['pypi_package_name'])
 
 
 def main(arguments):
