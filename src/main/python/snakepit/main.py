@@ -33,6 +33,7 @@ DEFAULTS = {
     'conda_dist_version':           '3.9.1',
     'extra_pip_args':               '',
     'symlinks':                     [],
+    'build':                        0,
 }
 
 PYPIMETAMAPPINGS = {
@@ -96,6 +97,14 @@ def main(arguments):
 
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
+
+    # create the build number
+    build_number = "{0}-{1}{2}_{3}".format(yaml_spec['build'],
+                                           yaml_spec['conda_dist_flavour'],
+                                           yaml_spec['conda_dist_flavour_version'],
+                                           yaml_spec['conda_dist_version'],
+                                           )
+    yaml_spec['build'] = build_number
 
     # load the template
     template = Template(pkg_resources.resource_string('snakepit',
