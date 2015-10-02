@@ -106,6 +106,7 @@ def main(arguments):
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
 
+    yaml_spec['build'] = arguments['--build']
     # create the build number
     build_number = "{0}-{1}{2}_{3}".format(yaml_spec['build'],
                                            yaml_spec['conda_dist_flavour'],

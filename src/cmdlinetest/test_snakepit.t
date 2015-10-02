@@ -80,3 +80,14 @@
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
+
+# now double check with --debug and --build
+
+  $ snakepit --force --debug --build 1 snakepit.yaml
+  {'--build': '1',
+   '--debug': True,
+   '--force': True,
+   '--help': False,
+   '--version': False,
+   '<file>': 'snakepit.yaml'}
+  Writing output to: 'moto.spec'
