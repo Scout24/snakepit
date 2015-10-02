@@ -113,14 +113,12 @@ specific language governing permissions and limitations under the License.
 * Include git-hash of snakepit in spec
 * Include version number of conda-dist
 * Download .sh installer via Source0
-* What about additional spec-file metadata, e.g. licence?
 * What about the illegibility of the spec file template
 * Decouple from make-opt-writable
 * Decouple svn2rpm
 * `--pre` and `--post` hooks for the spec file
-* Fixup the package summary from metadata on pypi
 * Fixup the package description from metadata on pypi
-* Release number should be: XX-miniconda.-pythonA.B
+* Release number should also contain the python version
 * Augment the description with complete metadata
 * Automagically determine the symlinks. (either by doing deltas during install,
   or by inspecting the metadata.)
