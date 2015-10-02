@@ -94,23 +94,25 @@ specific language governing permissions and limitations under the License.
 
 ## TODO
 
-* Include git-hash of snakepit in spec
-* Include version number of conda-dist
-* Specify template file via `--template`
-* Specify output via `--output`
-* Allow outputing the spec file on stdout using `--stdout`
-* Download .sh installer via Source0
+### YAML Spec
+
+
 * Install optional dependencies, e.g. `ipython[all]`
 * What if we want to install conda packages?
-* What if we have a complex dependency chain
-* What if we want to install multiple products
+* What if we have a complex dependency chain?
+* What if we want to install multiple products?
+* Ability to package additional things, such as bash completions, cron-jobs and
+  so on.
+
+### RPM Spec
+
+* Include git-hash of snakepit in spec
+* Include version number of conda-dist
+* Download .sh installer via Source0
 * What about additional spec-file metadata, e.g. licence?
 * What about the illegibility of the spec file template
-* Add a `--release` switch to modify the release number
 * Decouple from make-opt-writable
 * Decouple svn2rpm
-* Consider "snakepyt" as name
-* If no file specified, it should look for a `snakepit.yaml` or `.snakepit.yaml`
 * `--pre` and `--post` hooks for the spec file
 * Fixup the package summary from metadata on pypi
 * Fixup the package description from metadata on pypi
@@ -118,11 +120,22 @@ specific language governing permissions and limitations under the License.
 * Augment the description with complete metadata
 * Automagically determine the symlinks. (either by doing deltas during install,
   or by inspecting the metadata.)
-* Ability to package additional things, such as bash completions, cron-jobs and
-  so on.
-* Search for an existing `snakepit.yaml` in the current working directory.
 * Change package name from `product`-`conda-dist` to something the user can
   select.
+* In case we want to install c-extensions, we may need to add c-compiler and
+  other things to the ``build-requires``.
+
+### Interface
+
+* Specify template file via `--template`
+* Specify output via `--output`
+* Allow outputing the spec file on stdout using `--stdout`
+* Add a `--release` switch to modify the release number
+* If no file specified, it should look for a `snakepit.yaml` or `.snakepit.yaml`
+
+### Miscellaneoous
+
+* Consider "snakepyt" as name
 * Figure out how to get the cram-plugin to write coverge data too
 * Maybe we can delete things from the miniconda install that are not required
   since it is now static. E.g. stuff in `pkg`. This would help to reduce the
@@ -131,6 +144,4 @@ specific language governing permissions and limitations under the License.
 * Delete pip and conda after installing everything to remove the temptation to
   install things as root on the box. In fact, perhaps make a 'debug' yaml flag
   that allows to craete such packages.
-* In case we want to install c-extensions, we may need to add c-compiler and
-  other things.
 
