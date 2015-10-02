@@ -108,7 +108,7 @@ def main(arguments):
 
     yaml_spec['build'] = arguments['--build']
     # create the build number
-    build_number = "{0}-{1}{2}_{3}".format(yaml_spec['build'],
+    build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
                                            yaml_spec['conda_dist_flavour'],
                                            yaml_spec['conda_dist_flavour_version'],
                                            yaml_spec['conda_dist_version'],

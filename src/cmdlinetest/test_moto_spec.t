@@ -17,7 +17,7 @@
   
   Name:          moto
   Version:       0.3.1
-  Release:       0-miniconda_3.9.1
+  Release:       0_miniconda_3.9.1
   Summary:       A library that allows your python tests to easily mock out the boto library (EXPERIMENTAL SNAKEPIT STANDALONE)
   Group:         Development/Tools
   License:       Apache
