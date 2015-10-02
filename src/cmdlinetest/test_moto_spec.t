@@ -20,7 +20,7 @@
   Release:       0-miniconda_3.9.1
   Summary:       A library that allows your python tests to easily mock out the boto library (EXPERIMENTAL SNAKEPIT STANDALONE)
   Group:         Development/Tools
-  License:       UNKNOWN
+  License:       Apache
   Source0:       %{name}-%{version}.tar.gz
   BuildRoot:     %{_tmppath}/%{name}-%{version}-root
   BuildRequires: /bin/bash wget make-opt-writable

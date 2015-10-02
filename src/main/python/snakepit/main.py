@@ -33,6 +33,7 @@ DEFAULTS = {
     'pypi_package_name':            REQUIRED,
     'pypi_package_version':         FROMPYPIMETA,
     'pypi_package_summary':         FROMPYPIMETA,
+    'pypi_package_licence':         FROMPYPIMETA,
     'conda_dist_flavour':           'miniconda',
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
@@ -44,6 +45,7 @@ DEFAULTS = {
 PYPIMETAMAPPINGS = {
     'pypi_package_version':         'version',
     'pypi_package_summary':         'summary',
+    'pypi_package_licence':         'license',
 }
 
 # command line errors

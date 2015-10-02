@@ -9,7 +9,7 @@ Version:       {{ pypi_package_version }}
 Release:       {{ build }}
 Summary:       {{ pypi_package_summary }} (EXPERIMENTAL SNAKEPIT STANDALONE)
 Group:         Development/Tools
-License:       UNKNOWN
+License:       {{ pypi_package_licence }}
 Source0:       %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-root
 BuildRequires: /bin/bash wget make-opt-writable
