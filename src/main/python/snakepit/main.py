@@ -12,6 +12,8 @@ import requests
 
 TEMPLATE_FILENAME = 'TEMPLATE.spec'
 DEBUG = False
+REQUIRED = None
+FROMPYPIMETA = None
 
 
 def print_debug(message):
@@ -24,11 +26,13 @@ def fail(message, exit_code=1):
     sys.exit(exit_code)
 
 # Arguments for the template
-# None means no default, anything else is the default
+# REQUIRED means it is required
+# FROMPYPIMETA means it will get it from PyPi
+# Strings and other values are defaults
 DEFAULTS = {
-    'pypi_package_name':            None,
-    'pypi_package_version':         None,
-    'pypi_package_summary':         None,
+    'pypi_package_name':            REQUIRED,
+    'pypi_package_version':         FROMPYPIMETA,
+    'pypi_package_summary':         FROMPYPIMETA,
     'conda_dist_flavour':           'miniconda',
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
