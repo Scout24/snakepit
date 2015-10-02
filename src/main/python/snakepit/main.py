@@ -8,6 +8,7 @@ import pkg_resources
 
 import yaml
 from jinja2 import Template
+import requests
 
 TEMPLATE_FILENAME = 'TEMPLATE.spec'
 DEBUG = False
@@ -34,6 +35,9 @@ DEFAULTS = {
     'symlinks':                     [],
 }
 
+PYPIMETAMAPPINGS = {
+    'pypi_package_version':         'version',
+}
 
 # command line errors
 output_file_exists = 2
@@ -62,6 +66,11 @@ def default_output_filename(yaml_spec):
     return "{0}.spec".format(yaml_spec['pypi_package_name'])
 
 
+def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
+    return requests.get("{url}/{package}/json".
+                        format(url=url, package=package)).json()
+
+
 def main(arguments):
     global DEBUG
     if arguments['--debug']:
@@ -77,6 +86,13 @@ def main(arguments):
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
     yaml_spec.update(loaded_yaml)
+
+    # get package metadata from PyPi
+    pypi_meta = get_pypi_metadata(yaml_spec['pypi_package_name'])['info']
+    # inject things we can get from pypi, that are missing
+    for snakepit_key, pypi_meta_key in PYPIMETAMAPPINGS.items():
+        if snakepit_key not in yaml_spec or yaml_spec[snakepit_key] is None:
+            yaml_spec[snakepit_key] = pypi_meta[pypi_meta_key]
 
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)

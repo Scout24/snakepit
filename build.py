@@ -26,6 +26,7 @@ def set_properties(project):
     project.depends_on("jinja2")
     project.depends_on("pyyaml")
     project.depends_on("docopt")
+    project.depends_on("requests")
     project.include_file('snakepit', 'TEMPLATE.spec')
     project.set_property('distutils_classifiers', [
         'Development Status :: 2 - Pre-Alpha',
