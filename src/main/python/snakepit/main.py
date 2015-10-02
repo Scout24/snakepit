@@ -43,13 +43,6 @@ class TemplateNoteFoundException(Exception):
     pass
 
 
-def update_loaded(defaults, loaded_yaml):
-    """ Update loaded_yaml with values and keys from defaults. """
-    for key, value in defaults.items():
-        if key not in loaded_yaml:
-            loaded_yaml[key] = value
-
-
 def add_conda_dist_flavour_prefix(loaded_yaml):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
@@ -75,16 +68,21 @@ def main(arguments):
         DEBUG = True
     print_debug(arguments)
 
+    # create the object to hold the final yaml spec
+    yaml_spec = {}
+    yaml_spec.update(DEFAULTS)
+
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
 
-    update_loaded(DEFAULTS, loaded_yaml)
-    add_conda_dist_flavour_prefix(loaded_yaml)
+    yaml_spec.update(loaded_yaml)
+
+    add_conda_dist_flavour_prefix(yaml_spec)
     template = Template(pkg_resources.resource_string('snakepit',
                                                       TEMPLATE_FILENAME))
 
-    output_filename = default_output_filename(loaded_yaml)
-    rendered_template = template.render(**loaded_yaml)
+    output_filename = default_output_filename(yaml_spec)
+    rendered_template = template.render(**yaml_spec)
     if osp.isfile(output_filename) and not arguments['--force']:
         fail("File: '{0}' exists already, use --force to overwrite".
              format(output_filename), exit_code=output_file_exists)
