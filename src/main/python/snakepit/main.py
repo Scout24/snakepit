@@ -28,6 +28,7 @@ def fail(message, exit_code=1):
 DEFAULTS = {
     'pypi_package_name':            None,
     'pypi_package_version':         None,
+    'pypi_package_summary':         None,
     'conda_dist_flavour':           'miniconda',
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
@@ -38,6 +39,7 @@ DEFAULTS = {
 
 PYPIMETAMAPPINGS = {
     'pypi_package_version':         'version',
+    'pypi_package_summary':         'summary',
 }
 
 # command line errors
