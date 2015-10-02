@@ -132,7 +132,7 @@ specific language governing permissions and limitations under the License.
 * Specify template file via `--template`
 * Specify output via `--output`
 * Allow outputing the spec file on stdout using `--stdout`
-* Add a `--release` switch to modify the release number
+* Decide if it should be '--build' or '--release'
 * If no file specified, it should look for a `snakepit.yaml` or `.snakepit.yaml`
 
 ### Miscellaneoous
