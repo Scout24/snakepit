@@ -4,7 +4,7 @@
 """snakepit
 
 Usage:
-  snakepit [--debug] [(-f | --force)]<file>
+  snakepit [--debug] [(-f | --force)] <file>
   snakepit (-h | --help)
   snakepit --version
 
