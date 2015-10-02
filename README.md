@@ -106,6 +106,7 @@ specific language governing permissions and limitations under the License.
 * Ability to install from a git-repo
 * Ability to run all tests before creating the RPM (usually not possible if
   from PyPi)
+* Add a 'minimum_snakepit_version' number and abort if snakepit is too old.
 
 ### RPM Spec
 
