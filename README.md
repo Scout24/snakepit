@@ -103,6 +103,9 @@ specific language governing permissions and limitations under the License.
 * What if we want to install multiple products?
 * Ability to package additional things, such as bash completions, cron-jobs and
   so on.
+* Ability to install from a git-repo
+* Ability to run all tests before creating the RPM (usually not possible if
+  from PyPi)
 
 ### RPM Spec
 
