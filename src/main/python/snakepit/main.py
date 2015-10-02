@@ -70,19 +70,28 @@ def main(arguments):
 
     # create the object to hold the final yaml spec
     yaml_spec = {}
+    # inject the defaults
     yaml_spec.update(DEFAULTS)
 
+    # load the snakepit.yaml and update
     with open(arguments['<file>']) as fp:
         loaded_yaml = yaml.load(fp)
-
     yaml_spec.update(loaded_yaml)
 
+    # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
+
+    # load the template
     template = Template(pkg_resources.resource_string('snakepit',
                                                       TEMPLATE_FILENAME))
 
+    # get the output filename
     output_filename = default_output_filename(yaml_spec)
+
+    # render the template
     rendered_template = template.render(**yaml_spec)
+
+    # write it out
     if osp.isfile(output_filename) and not arguments['--force']:
         fail("File: '{0}' exists already, use --force to overwrite".
              format(output_filename), exit_code=output_file_exists)
