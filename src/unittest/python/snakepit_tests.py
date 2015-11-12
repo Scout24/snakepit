@@ -1,7 +1,6 @@
 import unittest
 
-from snakepit import add_conda_dist_flavour_prefix
-
+from snakepit import add_conda_dist_flavour_prefix, custom_output_filename
 
 class TestSnakepit(unittest.TestCase):
 
@@ -11,3 +10,7 @@ class TestSnakepit(unittest.TestCase):
                     'conda_dist_flavour_urlprefix': 'Miniconda'}
         add_conda_dist_flavour_prefix(input_)
         self.assertEquals(expected, input_)
+
+    def test_return_custom_filename_with_directory(self):
+        output_filename = custom_output_filename("package.spec", "/some/where")
+        self.assertEqual(output_filename, "/some/where/package.spec")

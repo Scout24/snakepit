@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,31 +26,33 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help        Show this screen.
-    --version        Show version.
-    --debug          Enable debug output.
-    --build=<build>  The build number [default: 0]
-    -f, --force      Force overwrite of output.
+    -h --help             Show this screen.
+    --version             Show version.
+    --debug               Enable debug output.
+    --build=<build>       The build number [default: 0]
+    -f, --force           Force overwrite of output.
+    --output=<filename>   Filename for SPEC-File.
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help        Show this screen.
-    --version        Show version.
-    --debug          Enable debug output.
-    --build=<build>  The build number [default: 0]
-    -f, --force      Force overwrite of output.
+    -h --help             Show this screen.
+    --version             Show version.
+    --debug               Enable debug output.
+    --build=<build>       The build number [default: 0]
+    -f, --force           Force overwrite of output.
+    --output=<filename>   Filename for SPEC-File.
 
 # test generating file
 
@@ -77,6 +79,7 @@
    '--debug': True,
    '--force': True,
    '--help': False,
+   '--output': None,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
@@ -88,6 +91,43 @@
    '--debug': True,
    '--force': True,
    '--help': False,
+   '--output': None,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
+
+# test specified output is an existent directory
+
+  $ snakepit snakepit.yaml --output /some/where/else
+  Traceback (most recent call last):
+  .* (re)
+  .* (re)
+  .* (re)
+  .* (re)
+  IOError: [Errno 2] No such file or directory: '/some/where/else'
+  [1]
+
+# test specified output writable
+
+  $ snakepit snakepit.yaml --output /some/where/else/moto.spec
+  Traceback (most recent call last):
+  .* (re)
+  .* (re)
+  .* (re)
+  .* (re)
+  IOError: [Errno 2] No such file or directory: '/some/where/else/moto.spec'
+  [1]
+
+# test specified output file was created
+
+  $ snakepit snakepit.yaml --output moto.spec --force
+  $ ls moto.spec
+  moto.spec
+
+# test specified output file was created in specified directory  
+
+  $ mkdir somewhere
+  $ snakepit snakepit.yaml --output somewhere/moto.spec
+  $ ls somewhere/moto.spec
+  somewhere/moto.spec
+  $ rm -r somewhere

@@ -80,6 +80,10 @@ def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
                         format(url=url, package=package)).json()
 
 
+def custom_output_filename(filename, output_directory):
+    return osp.join(output_directory, filename)
+
+
 def main(arguments):
     global DEBUG
     if arguments['--debug']:
@@ -120,7 +124,14 @@ def main(arguments):
                                                       TEMPLATE_FILENAME))
 
     # get the output filename
-    output_filename = default_output_filename(yaml_spec)
+    if arguments['--output']:
+        if osp.isdir(arguments['--output']):
+            output_filename = custom_output_filename(
+                default_output_filename(yaml_spec), arguments['--output'])
+        else:
+            output_filename = arguments['--output']
+    else:
+        output_filename = default_output_filename(yaml_spec)
 
     # render the template
     rendered_template = template.render(**yaml_spec)
