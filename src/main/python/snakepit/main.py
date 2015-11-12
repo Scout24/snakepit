@@ -89,7 +89,7 @@ def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
 
 
 def custom_output_filename(filename, output_directory):
-    output_filename = "{0}/{1}".format(output_directory, filename)
+    output_filename = "{0}".format(osp.join(output_directory, filename))
     if os.access(output_directory, os.W_OK):
         return output_filename
     else:
