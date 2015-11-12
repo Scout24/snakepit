@@ -125,8 +125,11 @@ def main(arguments):
 
     # get the output filename
     if arguments['--output']:
-        output_filename = custom_output_filename(
-            default_output_filename(yaml_spec), arguments['--output'])
+        if osp.isdir(arguments['--output']):
+            output_filename = custom_output_filename(
+                default_output_filename(yaml_spec), arguments['--output'])
+        else:
+            output_filename = arguments['--output']
     else:
         output_filename = default_output_filename(yaml_spec)
 

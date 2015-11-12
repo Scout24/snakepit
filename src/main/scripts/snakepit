@@ -4,7 +4,7 @@
 """snakepit
 
 Usage:
-  snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
+  snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
   snakepit (-h | --help)
   snakepit --version
 
@@ -14,7 +14,7 @@ Options:
   --debug               Enable debug output.
   --build=<build>       The build number [default: 0]
   -f, --force           Force overwrite of output.
-  --output=<direcotry>  Output directory for SPEC-File.
+  --output=<filename>   Filename for SPEC-File.
 
 """
 

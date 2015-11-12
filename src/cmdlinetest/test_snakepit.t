@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,7 +26,7 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   
@@ -36,13 +36,13 @@
     --debug               Enable debug output.
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
-    --output=<direcotry>  Output directory for SPEC-File.
+    --output=<filename>   Filename for SPEC-File.
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
     snakepit (-h | --help)
     snakepit --version
   
@@ -52,7 +52,7 @@
     --debug               Enable debug output.
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
-    --output=<direcotry>  Output directory for SPEC-File.
+    --output=<filename>   Filename for SPEC-File.
 
 # test generating file
 
@@ -96,9 +96,20 @@
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
 
-# test specified output is writable
+# test specified output is an existent directory
 
   $ snakepit snakepit.yaml --output /some/where/else
+  Traceback (most recent call last):
+  .* (re)
+  .* (re)
+  .* (re)
+  .* (re)
+  IOError: [Errno 2] No such file or directory: '/some/where/else'
+  [1]
+
+# test specified output writable
+
+  $ snakepit snakepit.yaml --output /some/where/else/moto.spec
   Traceback (most recent call last):
   .* (re)
   .* (re)
