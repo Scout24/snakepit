@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,31 +26,33 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help        Show this screen.
-    --version        Show version.
-    --debug          Enable debug output.
-    --build=<build>  The build number [default: 0]
-    -f, --force      Force overwrite of output.
+    -h --help             Show this screen.
+    --version             Show version.
+    --debug               Enable debug output.
+    --build=<build>       The build number [default: 0]
+    -f, --force           Force overwrite of output.
+    --output=<direcotry>  output directory for SPEC-File
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<directory>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help        Show this screen.
-    --version        Show version.
-    --debug          Enable debug output.
-    --build=<build>  The build number [default: 0]
-    -f, --force      Force overwrite of output.
+    -h --help             Show this screen.
+    --version             Show version.
+    --debug               Enable debug output.
+    --build=<build>       The build number [default: 0]
+    -f, --force           Force overwrite of output.
+    --output=<direcotry>  output directory for SPEC-File
 
 # test generating file
 
@@ -77,6 +79,7 @@
    '--debug': True,
    '--force': True,
    '--help': False,
+   '--output': None,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
@@ -88,6 +91,7 @@
    '--debug': True,
    '--force': True,
    '--help': False,
+   '--output': None,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'

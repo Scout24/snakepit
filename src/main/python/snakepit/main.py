@@ -3,6 +3,7 @@
 from __future__ import print_function, division
 
 import os.path as osp
+import os
 import sys
 import pkg_resources
 
@@ -56,6 +57,13 @@ class TemplateNoteFoundException(Exception):
     pass
 
 
+class OutputDirectoryNotWritable(Exception):
+    def __init__(self, directory):
+        sys.stderr.write("specified directory {0} is not writable\n".
+                         format(directory))
+        sys.exit(1)
+
+
 def add_conda_dist_flavour_prefix(yaml_spec):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
@@ -78,6 +86,14 @@ def default_output_filename(yaml_spec):
 def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
     return requests.get("{url}/{package}/json".
                         format(url=url, package=package)).json()
+
+
+def custom_output_filename(filename, output_directory):
+    output_filename = "{0}/{1}".format(output_directory, filename)
+    if os.access(output_directory, os.W_OK):
+        return output_filename
+    else:
+        raise OutputDirectoryNotWritable(output_directory)
 
 
 def main(arguments):
@@ -120,7 +136,11 @@ def main(arguments):
                                                       TEMPLATE_FILENAME))
 
     # get the output filename
-    output_filename = default_output_filename(yaml_spec)
+    if arguments['--output']:
+        output_filename = custom_output_filename(
+            default_output_filename(yaml_spec), arguments['--output'])
+    else:
+        output_filename = default_output_filename(yaml_spec)
 
     # render the template
     rendered_template = template.render(**yaml_spec)
