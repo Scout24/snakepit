@@ -117,7 +117,6 @@ specific language governing permissions and limitations under the License.
 * Decouple from make-opt-writable
 * Decouple svn2rpm
 * `--pre` and `--post` hooks for the spec file
-* Fixup the package description from metadata on pypi
 * Release number should also contain the python version
 * Augment the description with complete metadata
 * Automagically determine the symlinks. (either by doing deltas during install,
