@@ -36,7 +36,7 @@
     --debug               Enable debug output.
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
-    --output=<direcotry>  output directory for SPEC-File
+    --output=<direcotry>  Output directory for SPEC-File.
 
   $ snakepit --help
   snakepit
@@ -52,7 +52,7 @@
     --debug               Enable debug output.
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
-    --output=<direcotry>  output directory for SPEC-File
+    --output=<direcotry>  Output directory for SPEC-File.
 
 # test generating file
 
