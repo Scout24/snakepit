@@ -95,3 +95,14 @@
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
+
+# test specified output is writable
+
+  $ snakepit snakepit.yaml --output /some/where/else
+  Traceback (most recent call last):
+  .* (re)
+  .* (re)
+  .* (re)
+  .* (re)
+  IOError: [Errno 2] No such file or directory: '/some/where/else/moto.spec'
+  [1]
