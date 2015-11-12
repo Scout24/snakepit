@@ -3,7 +3,6 @@
 from __future__ import print_function, division
 
 import os.path as osp
-import os
 import sys
 import pkg_resources
 
@@ -57,13 +56,6 @@ class TemplateNoteFoundException(Exception):
     pass
 
 
-class OutputDirectoryNotWritable(Exception):
-    def __init__(self, directory):
-        sys.stderr.write("specified directory {0} is not writable\n".
-                         format(directory))
-        sys.exit(1)
-
-
 def add_conda_dist_flavour_prefix(yaml_spec):
     """ Add an first letter uppercase version of the conda_dist_flavour.
 
@@ -89,11 +81,7 @@ def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
 
 
 def custom_output_filename(filename, output_directory):
-    output_filename = "{0}".format(osp.join(output_directory, filename))
-    if os.access(output_directory, os.W_OK):
-        return output_filename
-    else:
-        raise OutputDirectoryNotWritable(output_directory)
+    return "{0}".format(osp.join(output_directory, filename))
 
 
 def main(arguments):
