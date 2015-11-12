@@ -81,7 +81,7 @@ def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
 
 
 def custom_output_filename(filename, output_directory):
-    return "{0}".format(osp.join(output_directory, filename))
+    return osp.join(output_directory, filename)
 
 
 def main(arguments):
