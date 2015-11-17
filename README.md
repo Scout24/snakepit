@@ -62,6 +62,32 @@ To install, do:
 $ pip install snakepit
 ```
 
+## Example based on [gaius](https://github.com/ImmobilienScout24/gaius)
+
+In your homedir (on a SL6 server):
+```
+~ $ git clone https://github.com/ImmobilienScout24/gaius.git
+~ $ virtualenv .venv
+~ $ . .venv/bin/activate
+(.venv) ~ $ pip install pip -U
+(.venv) ~ $ pip install snakepit
+(.venv) ~ $ snakepit gaius/snakepit/gaius.yaml
+(.venv) ~ $ deactivate
+~ $ rpmbuild -bb gaius.spec
+~ $ ls  rpmbuild/RPMS/x86_64
+gaius-49.0-0_miniconda_3.9.1.x86_64.rpm
+```
+Some other SL6 Server:
+```
+~ $ sudo rpm -i gaius-49.0-0_miniconda_3.9.1.x86_64.rpm
+~ $ gaius
+Usage:
+    gaius --stack STACK --parameters PARAMETERS --topic-arn ARN [--region REGION]
+```
+
+
+
+
 ## Development
 
 Use pybuilder: http://pybuilder.github.io/
