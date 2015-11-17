@@ -21,7 +21,6 @@
   Summary:       A library that allows your python tests to easily mock out the boto library (EXPERIMENTAL SNAKEPIT STANDALONE)
   Group:         Development/Tools
   License:       Apache
-  Source0:       %{name}-%{version}.tar.gz
   BuildRoot:     %{_tmppath}/%{name}-%{version}-root
   BuildRequires: /bin/bash wget make-opt-writable
   AutoReqProv:   no
