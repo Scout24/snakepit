@@ -1,6 +1,10 @@
 # do not create debug-packages
 %define debug_package %{nil}
 
+# do not prelink, it would break some cross-linking stuff from miniconda
+# if you build in userspace
+%define __prelink_undo_cmd     %{nil}
+
 # deactivcate python bytecompiling
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 
@@ -11,7 +15,7 @@ Summary:       {{ pypi_package_summary }} (EXPERIMENTAL SNAKEPIT STANDALONE)
 Group:         Development/Tools
 License:       {{ pypi_package_licence }}
 BuildRoot:     %{_tmppath}/%{name}-%{version}-root
-BuildRequires: /bin/bash wget make-opt-writable
+BuildRequires: /bin/bash wget
 AutoReqProv:   no
 
 %description
@@ -20,25 +24,24 @@ AutoReqProv:   no
 %build
 echo MY_USER=$USER
 # clean, just in case
-rm -rf /opt/{{ pypi_package_name }}
+rm -rf {{ pypi_package_name }}
 # install {{ conda_dist_flavour }} into /opt
 wget -nv http://repo.continuum.io/{{ conda_dist_flavour }}/{{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-%{_build_arch}.sh
-bash {{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-x86_64.sh -b -p /opt/{{ pypi_package_name }}
+bash {{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda_dist_version }}-Linux-x86_64.sh -b -p {{ pypi_package_name }}
 # bootstrap pip
-/opt/{{ pypi_package_name }}/bin/conda install --yes pip
+{{ pypi_package_name }}/bin/conda install --yes pip
 # use pip to install {{ pypi_package_name }}
-/opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} {{ pypi_package_name }}=={{ pypi_package_version }}
+{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} --global-option build_scripts --global-option "--executable=/opt/{{ pypi_package_name }}/bin/python" {{ pypi_package_name }}=={{ pypi_package_version }}
 # cleanup the conda install a little
-/opt/{{ pypi_package_name }}/bin/conda clean --tarballs --packages --yes
+{{ pypi_package_name }}/bin/conda clean --tarballs --packages --yes
 # cleanup the conda install a little more
-rm -rvf /opt/{{ pypi_package_name }}/pkgs/*
+rm -rvf {{ pypi_package_name }}/pkgs/*
 
 %install
 # create /opt/{{ pypi_package_name }} in buildroot
-mkdir -p %{buildroot}/opt/{{ pypi_package_name }}
+install -m 755 -d %{buildroot}/opt/{{ pypi_package_name }}
 # copy the built {{ conda_dist_flavour }} env into the buildroot
-cp -r /opt/{{ pypi_package_name }} %{buildroot}/opt
-ls %{buildroot}/opt/{{ pypi_package_name }}
+cp -a {{ pypi_package_name }} %{buildroot}/opt
 # create a /usr/bin
 install -m 755 -d %{buildroot}/usr/bin
 # do all the symlinks
@@ -48,7 +51,7 @@ ln -s /opt/{{ pypi_package_name }}/bin/{{ item }} %{buildroot}/usr/bin
 
 %clean
 # remove the result of the build step
-rm -rf /opt/{{ pypi_package_name }}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
