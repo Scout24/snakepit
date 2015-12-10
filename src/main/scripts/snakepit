@@ -4,7 +4,7 @@
 """snakepit
 
 Usage:
-  snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
+  snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
   snakepit (-h | --help)
   snakepit --version
 
@@ -15,6 +15,7 @@ Options:
   --build=<build>       The build number [default: 0]
   -f, --force           Force overwrite of output.
   --output=<filename>   Filename for SPEC-File.
+  --pyrun               Build SPEC-File for PyRun
 
 """
 
