@@ -58,4 +58,10 @@ docs/_build/
 # PyBuilder
 target/
 
+# VirtualEnv
+.venv*
+
+# Idea
+.idea
+
 # Created by .ignore support plugin (hsz.mobi)
