@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,7 +26,7 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
     snakepit (-h | --help)
     snakepit --version
   
@@ -37,12 +37,13 @@
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
     --output=<filename>   Filename for SPEC-File.
+    --pyrun               Build SPEC-File for PyRun
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
     snakepit (-h | --help)
     snakepit --version
   
@@ -53,6 +54,7 @@
     --build=<build>       The build number [default: 0]
     -f, --force           Force overwrite of output.
     --output=<filename>   Filename for SPEC-File.
+    --pyrun               Build SPEC-File for PyRun
 
 # test generating file
 
@@ -80,6 +82,7 @@
    '--force': True,
    '--help': False,
    '--output': None,
+   '--pyrun': False,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
@@ -92,6 +95,7 @@
    '--force': True,
    '--help': False,
    '--output': None,
+   '--pyrun': False,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'

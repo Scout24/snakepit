@@ -12,10 +12,6 @@
   # do not create debug-packages
   %define debug_package %{nil}
   
-  # do not prelink, it would break some cross-linking stuff from miniconda
-  # if you build in userspace
-  %define __prelink_undo_cmd     %{nil}
-  
   # deactivcate python bytecompiling
   %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
   
@@ -26,7 +22,7 @@
   Group:         Development/Tools
   License:       Apache
   BuildRoot:     %{_tmppath}/%{name}-%{version}-root
-  BuildRequires: /bin/bash wget
+  BuildRequires: /bin/bash wget make-opt-writable
   AutoReqProv:   no
   
   %description
@@ -35,24 +31,25 @@
   %build
   echo MY_USER=$USER
   # clean, just in case
-  rm -rf moto
+  rm -rf /opt/moto
   # install miniconda into /opt
   wget -nv http://repo.continuum.io/miniconda/Miniconda-3.9.1-Linux-%{_build_arch}.sh
-  bash Miniconda-3.9.1-Linux-x86_64.sh -b -p moto
+  bash Miniconda-3.9.1-Linux-x86_64.sh -b -p /opt/moto
   # bootstrap pip
-  moto/bin/conda install --yes pip
+  /opt/moto/bin/conda install --yes pip
   # use pip to install moto
-  moto/bin/pip install  --global-option build_scripts --global-option "--executable=/opt/moto/bin/python" moto==0.3.1
+  /opt/moto/bin/pip install  moto==0.3.1
   # cleanup the conda install a little
-  moto/bin/conda clean --tarballs --packages --yes
+  /opt/moto/bin/conda clean --tarballs --packages --yes
   # cleanup the conda install a little more
-  rm -rvf moto/pkgs/*
+  rm -rvf /opt/moto/pkgs/*
   
   %install
   # create /opt/moto in buildroot
-  install -m 755 -d %{buildroot}/opt/moto
+  mkdir -p %{buildroot}/opt/moto
   # copy the built miniconda env into the buildroot
-  cp -a moto %{buildroot}/opt
+  cp -r /opt/moto %{buildroot}/opt
+  ls %{buildroot}/opt/moto
   # create a /usr/bin
   install -m 755 -d %{buildroot}/usr/bin
   # do all the symlinks
@@ -62,7 +59,7 @@
   
   %clean
   # remove the result of the build step
-  rm -rf %{buildroot}
+  rm -rf /opt/moto
   
   %files
   %defattr(-,root,root,-)
