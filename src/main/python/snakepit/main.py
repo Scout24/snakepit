@@ -7,10 +7,9 @@ import sys
 import pkg_resources
 
 import yaml
-from jinja2 import Template
+from jinja2 import Template, Environment, PackageLoader
 import requests
 
-TEMPLATE_FILENAME = 'TEMPLATE.spec'
 DEBUG = False
 REQUIRED = None
 FROMPYPIMETA = None
@@ -37,8 +36,10 @@ DEFAULTS = {
     'conda_dist_flavour':           'miniconda',
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
+    'pyrun_dist_version':           '2.1.1',
     'extra_pip_args':               '',
     'symlinks':                     [],
+    'libraies':                     {},
     'build':                        0,
 }
 
@@ -90,6 +91,10 @@ def main(arguments):
         DEBUG = True
     print_debug(arguments)
 
+    # check if TEMPLATE is for PyRun otherwise use default
+    template_filename = 'TEMPLATE-PyRun.spec' if arguments['--pyrun'] else 'TEMPLATE.spec'
+    template_library_extension = 'TEMPLATE-PyRun-libraries-extension.ext'
+
     # create the object to hold the final yaml spec
     yaml_spec = {}
     # inject the defaults
@@ -112,16 +117,26 @@ def main(arguments):
 
     yaml_spec['build'] = arguments['--build']
     # create the build number
-    build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
-                                           yaml_spec['conda_dist_flavour'],
-                                           yaml_spec['conda_dist_flavour_version'],
-                                           yaml_spec['conda_dist_version'],
-                                           )
+    if arguments['--pyrun']:
+        build_number = "{0}_pyrun_{1}".format(yaml_spec['build'],
+                                              yaml_spec['pyrun_dist_version'])
+    else:
+        build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
+                                               yaml_spec['conda_dist_flavour'],
+                                               yaml_spec['conda_dist_flavour_version'],
+                                               yaml_spec['conda_dist_version'],
+                                               )
     yaml_spec['build'] = build_number
 
     # load the template
-    template = Template(pkg_resources.resource_string('snakepit',
-                                                      TEMPLATE_FILENAME))
+    template = Environment(loader=PackageLoader('snakepit', 'templates')).get_template(template_filename)
+
+    if arguments['--pyrun'] and yaml_spec.get('libraries'):
+        template_extension = Environment(loader=PackageLoader('snakepit', 'templates')).get_template(template_library_extension)
+        template = Environment().join_path(template_extension, template)
+
+    # render the template
+    rendered_template = template.render(**yaml_spec)
 
     # get the output filename
     if arguments['--output']:
@@ -132,9 +147,6 @@ def main(arguments):
             output_filename = arguments['--output']
     else:
         output_filename = default_output_filename(yaml_spec)
-
-    # render the template
-    rendered_template = template.render(**yaml_spec)
 
     # write it out
     if osp.isfile(output_filename) and not arguments['--force']:
