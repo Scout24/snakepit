@@ -27,7 +27,7 @@ bash install-pyrun {{ pypi_package_name }}
 # use pip to install {{ pypi_package_name }}
 {{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} --no-compile --global-option build_scripts --global-option "--executable=/opt/{{ pypi_package_name }}/bin/python" {{ pypi_package_name }}=={{ pypi_package_version }}
 #cleanup
-{{ pypi_package_name }}/bin/python -m pip uninstall pip setuptools -y
+{{ pypi_package_name }}/bin/pip uninstall pip setuptools -y
 
 %install
 # create /opt/{{ pypi_package_name }} in buildroot
