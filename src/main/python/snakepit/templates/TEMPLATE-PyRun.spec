@@ -32,7 +32,7 @@ bash install-pyrun {{ pypi_package_name }}
 %install
 # create /opt/{{ pypi_package_name }} in buildroot
 install -m 755 -d %{buildroot}/opt/{{ pypi_package_name }}
-# copy the built {{ conda_dist_flavour }} env into the buildroot
+# copy the built PyRun env into the buildroot
 cp -a {{ pypi_package_name }} %{buildroot}/opt
 # create a /usr/bin
 install -m 755 -d %{buildroot}/usr/bin
