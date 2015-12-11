@@ -10,7 +10,7 @@
 
   $ snakepit
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--distribution=<distribution>] <file>
     snakepit (-h | --help)
     snakepit --version
   [1]
@@ -26,35 +26,35 @@
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--distribution=<distribution>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help             Show this screen.
-    --version             Show version.
-    --debug               Enable debug output.
-    --build=<build>       The build number [default: 0]
-    -f, --force           Force overwrite of output.
-    --output=<filename>   Filename for SPEC-File.
-    --pyrun               Build SPEC-File for PyRun
+    -h --help                      Show this screen.
+    --version                      Show version.
+    --debug                        Enable debug output.
+    --build=<build>                The build number [default: 0]
+    -f, --force                    Force overwrite of output.
+    --output=<filename>            Filename for SPEC-File.
+    --distribution=<distribution>  Python distribution to use [default: miniconda]
 
   $ snakepit --help
   snakepit
   
   Usage:
-    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--pyrun] <file>
+    snakepit [--debug] [--build=<build>] [(-f | --force)] [--output=<filename>] [--distribution=<distribution>] <file>
     snakepit (-h | --help)
     snakepit --version
   
   Options:
-    -h --help             Show this screen.
-    --version             Show version.
-    --debug               Enable debug output.
-    --build=<build>       The build number [default: 0]
-    -f, --force           Force overwrite of output.
-    --output=<filename>   Filename for SPEC-File.
-    --pyrun               Build SPEC-File for PyRun
+    -h --help                      Show this screen.
+    --version                      Show version.
+    --debug                        Enable debug output.
+    --build=<build>                The build number [default: 0]
+    -f, --force                    Force overwrite of output.
+    --output=<filename>            Filename for SPEC-File.
+    --distribution=<distribution>  Python distribution to use [default: miniconda]
 
 # test generating file
 
@@ -79,10 +79,10 @@
   $ snakepit --force --debug snakepit.yaml
   {'--build': '0',
    '--debug': True,
+   '--distribution': 'miniconda',
    '--force': True,
    '--help': False,
    '--output': None,
-   '--pyrun': False,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
@@ -92,10 +92,10 @@
   $ snakepit --force --debug --build 1 snakepit.yaml
   {'--build': '1',
    '--debug': True,
+   '--distribution': 'miniconda',
    '--force': True,
    '--help': False,
    '--output': None,
-   '--pyrun': False,
    '--version': False,
    '<file>': 'snakepit.yaml'}
   Writing output to: 'moto.spec'
