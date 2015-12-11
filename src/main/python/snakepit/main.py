@@ -4,10 +4,9 @@ from __future__ import print_function, division
 
 import os.path as osp
 import sys
-import pkg_resources
 
 import yaml
-from jinja2 import Template, Environment, PackageLoader
+from jinja2 import Environment, PackageLoader
 import requests
 
 DEBUG = False
@@ -85,15 +84,48 @@ def custom_output_filename(filename, output_directory):
     return osp.join(output_directory, filename)
 
 
+def build_template(distribution, yaml_spec):
+    if distribution == "miniconda":
+        template_filename = 'TEMPLATE-miniconda.spec'
+    elif distribution == "pyrun":
+        template_filename = 'TEMPLATE-PyRun.spec'
+        template_library_extension = 'TEMPLATE-PyRun-libraries-extension.ext'
+
+    # load the template
+    template = Environment(
+        loader=PackageLoader('snakepit', 'templates')
+    ).get_template(template_filename)
+
+    if distribution == "pyrun" and yaml_spec.get('libraries'):
+        template_extension = Environment(
+            loader=PackageLoader('snakepit', 'templates')
+        ).get_template(template_library_extension)
+        template = Environment().join_path(template_extension, template)
+
+    # render the template
+    return template.render(**yaml_spec)
+
+
+def construct_build_number(distribution, build, yaml_spec):
+    # create the build number
+    yaml_spec['build'] = build
+    if distribution == "miniconda":
+        build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
+                                               yaml_spec['conda_dist_flavour'],
+                                               yaml_spec['conda_dist_flavour_version'],
+                                               yaml_spec['conda_dist_version'],)
+    elif distribution == "pyrun":
+        build_number = "{0}_pyrun_{1}".format(yaml_spec['build'],
+                                              yaml_spec['pyrun_dist_version'])
+
+    yaml_spec['build'] = build_number
+
+
 def main(arguments):
     global DEBUG
     if arguments['--debug']:
         DEBUG = True
     print_debug(arguments)
-
-    # check if TEMPLATE is for PyRun otherwise use default
-    template_filename = 'TEMPLATE-PyRun.spec' if arguments['--pyrun'] else 'TEMPLATE.spec'
-    template_library_extension = 'TEMPLATE-PyRun-libraries-extension.ext'
 
     # create the object to hold the final yaml spec
     yaml_spec = {}
@@ -115,28 +147,13 @@ def main(arguments):
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
 
-    yaml_spec['build'] = arguments['--build']
-    # create the build number
-    if arguments['--pyrun']:
-        build_number = "{0}_pyrun_{1}".format(yaml_spec['build'],
-                                              yaml_spec['pyrun_dist_version'])
-    else:
-        build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
-                                               yaml_spec['conda_dist_flavour'],
-                                               yaml_spec['conda_dist_flavour_version'],
-                                               yaml_spec['conda_dist_version'],
-                                               )
-    yaml_spec['build'] = build_number
+    # build release number
+    construct_build_number(arguments['--distribution'],
+                           arguments['--build'],
+                           yaml_spec)
 
-    # load the template
-    template = Environment(loader=PackageLoader('snakepit', 'templates')).get_template(template_filename)
-
-    if arguments['--pyrun'] and yaml_spec.get('libraries'):
-        template_extension = Environment(loader=PackageLoader('snakepit', 'templates')).get_template(template_library_extension)
-        template = Environment().join_path(template_extension, template)
-
-    # render the template
-    rendered_template = template.render(**yaml_spec)
+    rendered_template = build_template(arguments['--distribution'],
+                                       yaml_spec)
 
     # get the output filename
     if arguments['--output']:
