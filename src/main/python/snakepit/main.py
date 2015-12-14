@@ -36,6 +36,7 @@ DEFAULTS = {
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
     'pyrun_dist_version':           '2.1.1',
+    'pyrun_pythonfullversion':      '2.7',
     'extra_pip_args':               '',
     'symlinks':                     [],
     'libraies':                     {},
@@ -110,13 +111,16 @@ def construct_build_number(distribution, build, yaml_spec):
     # create the build number
     yaml_spec['build'] = build
     if distribution == "miniconda":
-        build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
-                                               yaml_spec['conda_dist_flavour'],
-                                               yaml_spec['conda_dist_flavour_version'],
-                                               yaml_spec['conda_dist_version'],)
+        build_number = "{0}_{1}{2}_{3}".format(
+            yaml_spec['build'],
+            yaml_spec['conda_dist_flavour'],
+            yaml_spec['conda_dist_flavour_version'],
+            yaml_spec['conda_dist_version'],)
     elif distribution == "pyrun":
-        build_number = "{0}_pyrun_{1}".format(yaml_spec['build'],
-                                              yaml_spec['pyrun_dist_version'])
+        build_number = "{0}_pyrun_{1}_py{2}".format(
+            yaml_spec['build'],
+            yaml_spec['pyrun_dist_version'],
+            yaml_spec['pyrun_pythonfullversion'])
 
     yaml_spec['build'] = build_number
 
