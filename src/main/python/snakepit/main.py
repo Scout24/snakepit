@@ -36,7 +36,7 @@ DEFAULTS = {
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
     'pyrun_dist_version':           '2.1.1',
-    'pyrun_pythonfullversion':      '2.7',
+    'pyrun_pythonfullversion':      '2.7.10',
     'extra_pip_args':               '',
     'symlinks':                     [],
     'libraies':                     {},
