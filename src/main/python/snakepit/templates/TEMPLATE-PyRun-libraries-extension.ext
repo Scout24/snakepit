@@ -1,8 +1,0 @@
-{% extends "TEMPLATE-PyRun.spec" %}
-{% block libraries %}
-#link libraries needed by pyrun
-mkdir -p {{ pypi_package_name }}/lib
-{% for source, destination in libraries.iteritems() %}
-ln -s {{ source }} {{ pypi_package_name }}/lib/{{ destination }}
-{% endfor %}
-{% endblock %}
