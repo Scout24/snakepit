@@ -25,7 +25,7 @@ install -m 755 -d pyrun
 # create /opt/{{ pypi_package_name }} in buildroot
 install -m 755 -d %{buildroot}/opt/{{ pypi_package_name }}
 # Build PyRun
-curl -s https://downloads.egenix.com/python/egenix-pyrun-2.1.1.tar.gz | tar xz -C pyrun --strip-components 1
+curl -s https://downloads.egenix.com/python/egenix-pyrun-{{ pyrun_dist_version }}.tar.gz | tar xz -C pyrun --strip-components 1
 make -C pyrun/PyRun install PYTHONFULLVERSION={{ pyrun_pythonfullversion }} PREFIX=%{buildroot}/opt/gaius
 # install setuptools
 install -m 755 -d setuptools
