@@ -39,8 +39,9 @@ DEFAULTS = {
     'pyrun_pythonfullversion':      '2.7.10',
     'extra_pip_args':               '',
     'symlinks':                     [],
-    'libraies':                     {},
     'build':                        0,
+    'setuptools':                   'setuptools-18.8.1.tar.gz',
+    'pip':                          'pip-7.1.2.tar.gz',
 }
 
 PYPIMETAMAPPINGS = {
@@ -90,18 +91,11 @@ def build_template(distribution, yaml_spec):
         template_filename = 'TEMPLATE-miniconda.spec'
     elif distribution == "pyrun":
         template_filename = 'TEMPLATE-PyRun.spec'
-        template_library_extension = 'TEMPLATE-PyRun-libraries-extension.ext'
 
     # load the template
     template = Environment(
         loader=PackageLoader('snakepit', 'templates')
     ).get_template(template_filename)
-
-    if distribution == "pyrun" and yaml_spec.get('libraries'):
-        template_extension = Environment(
-            loader=PackageLoader('snakepit', 'templates')
-        ).get_template(template_library_extension)
-        template = Environment().join_path(template_extension, template)
 
     # render the template
     return template.render(**yaml_spec)
@@ -120,7 +114,7 @@ def construct_build_number(distribution, build, yaml_spec):
         build_number = "{0}_pyrun_{1}_py{2}".format(
             yaml_spec['build'],
             yaml_spec['pyrun_dist_version'],
-            yaml_spec['pyrun_pythonfullversion'])
+            yaml_spec['pyrun_pythonfullversion'].rsplit(".", 1)[0])
 
     yaml_spec['build'] = build_number
 
