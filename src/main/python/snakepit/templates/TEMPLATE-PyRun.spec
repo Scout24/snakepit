@@ -30,11 +30,11 @@ make -C pyrun/PyRun install PYTHONFULLVERSION={{ pyrun_pythonfullversion }} PREF
 # install setuptools
 install -m 755 -d setuptools
 curl -s https://pypi.python.org/packages/source/s/setuptools/{{ setuptools }} | tar xz -C setuptools --strip-components 1
-cd setuptools && %{buildroot}/opt/gaius/bin/python setup.py install && cd -
+cd setuptools && %{buildroot}/opt/gaius/bin/{{ interpreter }} setup.py install && cd -
 # install pip
 install -m 755 -d pip
 curl -s https://pypi.python.org/packages/source/p/pip/{{ pip }} | tar xz -C pip --strip-components 1
-cd pip && %{buildroot}/opt/gaius/bin/python setup.py install && cd -
+cd pip && %{buildroot}/opt/gaius/bin/{{ interpreter }} setup.py install && cd -
 # change to BuildRoot
 cd %{buildroot}
 # use pip to install {{ pypi_package_name }}

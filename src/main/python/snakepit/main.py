@@ -42,6 +42,7 @@ DEFAULTS = {
     'build':                        0,
     'setuptools':                   'setuptools-18.8.1.tar.gz',
     'pip':                          'pip-7.1.2.tar.gz',
+    'interpreter':                  'python',
 }
 
 PYPIMETAMAPPINGS = {
@@ -96,6 +97,10 @@ def build_template(distribution, yaml_spec):
     template = Environment(
         loader=PackageLoader('snakepit', 'templates')
     ).get_template(template_filename)
+
+    # check if PyRun Python Version 3 is desired and change the interpreter
+    if yaml_spec['pyrun_pythonfullversion'].split('.')[0] == '3':
+        yaml_spec['interpreter'] = 'python3'
 
     # render the template
     return template.render(**yaml_spec)
