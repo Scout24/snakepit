@@ -68,19 +68,6 @@ $ pip install snakepit
 You do not need any make-opt-writable rpm or svn2rpm. Simply build your spec-
 file in userspace and reduce the rpm size more than by half.
 
-### Special optional configuration for PyRun
-The PyRun binary version 2.1.1 we download was compiled against OpenSSL libraries
-which are different in minor version and naming from the one on server we wan't 
-to install the RPM on
- 
-The ```libraries``` argument was introduced, so the spec-file can do some
-linkage magic for you.
-It is a dict with {'TARGET': 'LINK_NAME'}
-
-Example:
-```
-libraries: {'/usr/lib64/libssl.so':'libssl.so.1.0.0', '/usr/lib64/libcrypto.so':'libcrypto.so.1.0.0'}
-```
 
 ### Example based on [gaius](https://github.com/ImmobilienScout24/gaius) and Pyrun
 ```
@@ -93,11 +80,11 @@ libraries: {'/usr/lib64/libssl.so':'libssl.so.1.0.0', '/usr/lib64/libcrypto.so':
 (.venv) ~ $ deactivate
 ~ $ rpmbuild -bb gaius.spec
 ~ $ ls  rpmbuild/RPMS/x86_64
-gaius-128.0-0_pyrun_2.1.1.x86_64.rpm
+gaius-128.0-0_pyrun_2.1.1_py2.7.x86_64.rpm
 ```
 Some other SL6 Server:
 ```
-~ $ sudo rpm -i gaius-128.0-0_pyrun_2.1.1.x86_64.rpm
+~ $ sudo rpm -i gaius-128.0-0_pyrun_2.1.1_py2.7.x86_64.rpm
 ~ $ gaius
     Usage:
         gaius --stack STACK --parameters PARAMETERS --trigger-channel TOPIC_ARN
