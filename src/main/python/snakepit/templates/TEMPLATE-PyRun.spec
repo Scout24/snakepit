@@ -27,8 +27,6 @@ install -m 755 -d %{buildroot}/opt/{{ pypi_package_name }}
 # Build PyRun
 curl -s https://downloads.egenix.com/python/egenix-pyrun-2.1.1.tar.gz | tar xz -C pyrun --strip-components 1
 make -C pyrun/PyRun install PYTHONFULLVERSION=2.7.10 PREFIX=%{buildroot}/opt/gaius
-# change to BuildRoot
-cd %{buildroot}
 # install setuptools
 install -m 755 -d setuptools
 curl -s https://pypi.python.org/packages/source/s/setuptools/{{ setuptools }} | tar xz -C setuptools --strip-components 1
@@ -37,11 +35,12 @@ cd setuptools && %{buildroot}/opt/gaius/bin/python setup.py install && cd -
 install -m 755 -d pip
 curl -s https://pypi.python.org/packages/source/p/pip/{{ pip }} | tar xz -C pip --strip-components 1
 cd pip && %{buildroot}/opt/gaius/bin/python setup.py install && cd -
+# change to BuildRoot
+cd %{buildroot}
 # use pip to install {{ pypi_package_name }}
 opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} --no-compile --global-option build_scripts --global-option "--executable=/opt/{{ pypi_package_name }}/bin/python" {{ pypi_package_name }}=={{ pypi_package_version }}
 #cleanup
 opt/{{ pypi_package_name }}/bin/pip uninstall pip setuptools -y --disable-pip-version-check
-rm -r pip setuptools
 
 # create a /usr/bin
 install -m 755 -d %{buildroot}/usr/bin
