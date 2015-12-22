@@ -41,6 +41,7 @@ Furthermore, the spec file is of a special flavour of `svn2rpm` which can be
 found at: https://github.com/immobilienscout24/svn2rpm/. You may not yet be
 able to use the spec files w/o this tool and the surrounding boilerplate.
 
+
 ## How does it work?
 
 For a given product to build an RPM for---let's call it
@@ -60,6 +61,34 @@ To install, do:
 
 ```
 $ pip install snakepit
+```
+
+## Use PyRun as Python distribution to build a spec-file
+
+You do not need any make-opt-writable rpm or svn2rpm. Simply build your spec-
+file in userspace and reduce the rpm size more than by half.
+
+
+### Example based on [gaius](https://github.com/ImmobilienScout24/gaius) and Pyrun
+```
+~ $ git clone https://github.com/ImmobilienScout24/gaius.git
+~ $ virtualenv .venv
+~ $ . .venv/bin/activate
+(.venv) ~ $ pip install pip -U
+(.venv) ~ $ pip install snakepit
+(.venv) ~ $ snakepit gaius/snakepit/gaius.yaml --distribution=pyrun
+(.venv) ~ $ deactivate
+~ $ rpmbuild -bb gaius.spec
+~ $ ls  rpmbuild/RPMS/x86_64
+gaius-128.0-0_pyrun_2.1.1_py2.7.x86_64.rpm
+```
+Some other SL6 Server:
+```
+~ $ sudo rpm -i gaius-128.0-0_pyrun_2.1.1_py2.7.x86_64.rpm
+~ $ gaius
+    Usage:
+        gaius --stack STACK --parameters PARAMETERS --trigger-channel TOPIC_ARN
+             [--region REGION] --back-channel QUEUE_URL [--timeout TIMEOUT]
 ```
 
 ## Development

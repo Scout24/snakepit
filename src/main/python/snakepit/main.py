@@ -4,13 +4,11 @@ from __future__ import print_function, division
 
 import os.path as osp
 import sys
-import pkg_resources
 
 import yaml
-from jinja2 import Template
+from jinja2 import Environment, PackageLoader
 import requests
 
-TEMPLATE_FILENAME = 'TEMPLATE.spec'
 DEBUG = False
 REQUIRED = None
 FROMPYPIMETA = None
@@ -37,9 +35,14 @@ DEFAULTS = {
     'conda_dist_flavour':           'miniconda',
     'conda_dist_flavour_version':   '',
     'conda_dist_version':           '3.9.1',
+    'pyrun_dist_version':           '2.1.1',
+    'pyrun_pythonfullversion':      '2.7.10',
     'extra_pip_args':               '',
     'symlinks':                     [],
     'build':                        0,
+    'setuptools':                   'setuptools-18.8.1.tar.gz',
+    'pip':                          'pip-7.1.2.tar.gz',
+    'interpreter':                  'python',
 }
 
 PYPIMETAMAPPINGS = {
@@ -84,6 +87,43 @@ def custom_output_filename(filename, output_directory):
     return osp.join(output_directory, filename)
 
 
+def build_template(distribution, yaml_spec):
+    if distribution == "miniconda":
+        template_filename = 'TEMPLATE-miniconda.spec'
+    elif distribution == "pyrun":
+        template_filename = 'TEMPLATE-PyRun.spec'
+
+    # load the template
+    template = Environment(
+        loader=PackageLoader('snakepit', 'templates')
+    ).get_template(template_filename)
+
+    # check if PyRun Python Version 3 is desired and change the interpreter
+    if yaml_spec['pyrun_pythonfullversion'].split('.')[0] == '3':
+        yaml_spec['interpreter'] = 'python3'
+
+    # render the template
+    return template.render(**yaml_spec)
+
+
+def construct_build_number(distribution, build, yaml_spec):
+    # create the build number
+    yaml_spec['build'] = build
+    if distribution == "miniconda":
+        build_number = "{0}_{1}{2}_{3}".format(
+            yaml_spec['build'],
+            yaml_spec['conda_dist_flavour'],
+            yaml_spec['conda_dist_flavour_version'],
+            yaml_spec['conda_dist_version'],)
+    elif distribution == "pyrun":
+        build_number = "{0}_pyrun_{1}_py{2}".format(
+            yaml_spec['build'],
+            yaml_spec['pyrun_dist_version'],
+            yaml_spec['pyrun_pythonfullversion'].rsplit(".", 1)[0])
+
+    yaml_spec['build'] = build_number
+
+
 def main(arguments):
     global DEBUG
     if arguments['--debug']:
@@ -110,18 +150,13 @@ def main(arguments):
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
 
-    yaml_spec['build'] = arguments['--build']
-    # create the build number
-    build_number = "{0}_{1}{2}_{3}".format(yaml_spec['build'],
-                                           yaml_spec['conda_dist_flavour'],
-                                           yaml_spec['conda_dist_flavour_version'],
-                                           yaml_spec['conda_dist_version'],
-                                           )
-    yaml_spec['build'] = build_number
+    # build release number
+    construct_build_number(arguments['--distribution'],
+                           arguments['--build'],
+                           yaml_spec)
 
-    # load the template
-    template = Template(pkg_resources.resource_string('snakepit',
-                                                      TEMPLATE_FILENAME))
+    rendered_template = build_template(arguments['--distribution'],
+                                       yaml_spec)
 
     # get the output filename
     if arguments['--output']:
@@ -132,9 +167,6 @@ def main(arguments):
             output_filename = arguments['--output']
     else:
         output_filename = default_output_filename(yaml_spec)
-
-    # render the template
-    rendered_template = template.render(**yaml_spec)
 
     # write it out
     if osp.isfile(output_filename) and not arguments['--force']:
