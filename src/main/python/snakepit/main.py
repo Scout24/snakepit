@@ -43,6 +43,7 @@ DEFAULTS = {
     'setuptools':                   'setuptools-18.8.1.tar.gz',
     'pip':                          'pip-7.1.2.tar.gz',
     'interpreter':                  'python',
+    'distribution':                 'miniconda',
 }
 
 PYPIMETAMAPPINGS = {
@@ -87,7 +88,8 @@ def custom_output_filename(filename, output_directory):
     return osp.join(output_directory, filename)
 
 
-def build_template(distribution, yaml_spec):
+def build_template(yaml_spec):
+    distribution = yaml_spec['distribution']
     if distribution == "miniconda":
         template_filename = 'TEMPLATE-miniconda.spec'
     elif distribution == "pyrun":
@@ -106,9 +108,10 @@ def build_template(distribution, yaml_spec):
     return template.render(**yaml_spec)
 
 
-def construct_build_number(distribution, build, yaml_spec):
+def construct_build_number(build, yaml_spec):
     # create the build number
     yaml_spec['build'] = build
+    distribution = yaml_spec['distribution']
     if distribution == "miniconda":
         build_number = "{0}_{1}{2}_{3}".format(
             yaml_spec['build'],
@@ -150,13 +153,14 @@ def main(arguments):
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
 
-    # build release number
-    construct_build_number(arguments['--distribution'],
-                           arguments['--build'],
-                           yaml_spec)
+    # update the distribution with a value from the command-line
+    if arguments['--distribution']:
+        yaml_spec['distribution'] = arguments['--distribution']
 
-    rendered_template = build_template(arguments['--distribution'],
-                                       yaml_spec)
+    # build release number
+    construct_build_number(arguments['--build'], yaml_spec)
+
+    rendered_template = build_template(yaml_spec)
 
     # get the output filename
     if arguments['--output']:
