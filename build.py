@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#   -*- coding: utf-8 -*-
+
 from pybuilder.core import use_plugin, init, Author
 from pybuilder.vcs import VCSRevision
 
