@@ -2,5 +2,7 @@
 pypi_package_name:    moto
 # Which version to use
 pypi_package_version: 0.3.1
+pypi_package_summary: A library that allows your python tests to easily mock out the boto library
+pypi_package_licence: Apache
 # Any entry-points that should be symlinked
 symlinks:             ['moto_server']
