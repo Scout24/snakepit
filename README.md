@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ImmobilienScout24/snakepit.svg)](https://travis-ci.org/ImmobilienScout24/snakepit)
+
 # snakepit
 
 ## Description
