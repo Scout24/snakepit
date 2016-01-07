@@ -1,0 +1,23 @@
+language: python
+python:
+- '2.7'
+- pypy
+before_install:
+- git fetch --unshallow
+install:
+- pip install pybuilder coveralls
+- pyb -v install_dependencies
+script: pyb -X verify analyze
+after_success:
+- coveralls --verbose
+before_deploy:
+- pyb -v -X package
+deploy:
+  provider: pypi
+  user: Immobilienscout24
+  password:
+    secure: n30Kxah/t1B/sQR0b/aqgARmHsRcNTg0yX2oaMAl/8mc0IL39n01Zy9XyyoMOsHQjEW+ZUFy7cPneYlV2Vxpa0aICo19lb+oh5ZfSPf8LyvJpf/6zpvqlmhzrJJjDrEqdulAj/TCmPXyZT6y7F+7rFv7r1j+aXaT7S+COkADDO10iqchd8xAFqZKiVN3KpNTwpOFHoFbLWhqUtg0w4ir7xVA/bmXw2rDYVr5i2Kip6th2gFdpkyrc7XOt1Ez3ucVp+/EWBj07Dn8f7OVugVhd8X9oy042pKIJPf2/u3b5NjGZbJk/mC/Wh1UOhGIHZkJd9dlcB8bjXS72WmxqILgdkdpvcTRrq2bd+LzT997pBCs2Y8TisRNefogPfFpJiD7Bd/Oh6FJZBXh9ID1LpDqK2M0AHm6NSTAFiKH226No6/gSINFLl/V1x7CbY3bMoeWo2+gkYmHL5trBuMYICEIFxExTB5QLnJj4lmBwhmYk9dL5UPoHlgIc7XYm3unurw52VZRH+LNuAOO5Nb9mg6l4MJZHsp5Oqf4QyJOm4ENzSRYK09li1QYEl2pT+n5qI6GB6XGnG507HzqtiVI628rf8bKe00sYfD3HkIl85+du86ZbjIK0gU4JCdSdnf+l8Pvkbobi8SmcjW9/zFQb261ufLCHFwyiigV39GHK29xRZw=
+  on:
+    repo: ImmobilienScout24/snakepit
+    python: '2.7'
+    branch: master
