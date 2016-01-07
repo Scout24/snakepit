@@ -144,11 +144,12 @@ def main(arguments):
     yaml_spec.update(loaded_yaml)
 
     # get package metadata from PyPi
-    pypi_meta = get_pypi_metadata(yaml_spec['pypi_package_name'])['info']
-    # inject things we can get from pypi, that are missing
-    for snakepit_key, pypi_meta_key in PYPIMETAMAPPINGS.items():
-        if snakepit_key not in yaml_spec or yaml_spec[snakepit_key] is None:
-            yaml_spec[snakepit_key] = pypi_meta[pypi_meta_key]
+    if not yaml_spec['pypi_package_version']:
+        pypi_meta = get_pypi_metadata(yaml_spec['pypi_package_name'])['info']
+        # inject things we can get from pypi, that are missing
+        for snakepit_key, pypi_meta_key in PYPIMETAMAPPINGS.items():
+            if snakepit_key not in yaml_spec or yaml_spec[snakepit_key] is None:
+                yaml_spec[snakepit_key] = pypi_meta[pypi_meta_key]
 
     # do some more magic
     add_conda_dist_flavour_prefix(yaml_spec)
