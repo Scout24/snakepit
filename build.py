@@ -30,7 +30,8 @@ def set_properties(project):
     project.depends_on("pyyaml")
     project.depends_on("docopt")
     project.depends_on("requests")
-    project.include_directory('snakepit', ['*.spec', '*.ext'])
+    project.include_file('snakepit', 'templates/TEMPLATE-PyRun.spec')
+    project.include_file('snakepit', 'templates/TEMPLATE-miniconda.spec')
     project.set_property('distutils_classifiers', [
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
