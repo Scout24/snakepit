@@ -11,7 +11,7 @@ Summary:       {{ pypi_package_summary }} (EXPERIMENTAL SNAKEPIT STANDALONE)
 Group:         Development/Tools
 License:       {{ pypi_package_licence }}
 BuildRoot:     %{_tmppath}/%{name}-%{version}-root
-BuildRequires: /bin/bash curl sqlite-devel bzip2-devel openssl-devel zlib-devel
+BuildRequires: /bin/bash wget curl sqlite-devel bzip2-devel openssl-devel zlib-devel
 AutoReqProv:   no
 
 %description
