@@ -79,7 +79,7 @@ def default_output_filename(yaml_spec):
     return "{0}.spec".format(yaml_spec['pypi_package_name'])
 
 
-def get_pypi_metadata(package, url='https://pypi.python.org/pypi/'):
+def get_pypi_metadata(package, url='https://pypi.python.org/pypi'):
     return requests.get("{url}/{package}/json".
                         format(url=url, package=package)).json()
 

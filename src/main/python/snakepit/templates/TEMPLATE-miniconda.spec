@@ -27,7 +27,7 @@ bash {{ conda_dist_flavour_urlprefix }}{{ conda_dist_flavour_version }}-{{ conda
 # bootstrap pip
 /opt/{{ pypi_package_name }}/bin/conda install --yes pip
 # use pip to install {{ pypi_package_name }}
-/opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} {{ pypi_package_name }}=={{ pypi_package_version }}
+/opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} {{ pypi_package_name }}{{ '==%s' % pypi_package_version if pypi_package_version != 'latest' else ''}}
 # cleanup the conda install a little
 /opt/{{ pypi_package_name }}/bin/conda clean --tarballs --packages --yes
 # cleanup the conda install a little more

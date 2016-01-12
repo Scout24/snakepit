@@ -1,0 +1,4 @@
+# Name of the top-level product
+pypi_package_name: my_package
+# Any entry-points that should be symlinked
+symlinks: ['my_package']
