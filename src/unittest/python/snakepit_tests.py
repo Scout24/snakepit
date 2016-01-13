@@ -1,5 +1,6 @@
 import unittest2
 import os
+import re
 import requests_mock
 from snakepit import main, add_conda_dist_flavour_prefix, \
     custom_output_filename
@@ -13,6 +14,10 @@ class TestSnakepit(unittest2.TestCase):
                      '--build': 0,
                      '--output': '/tmp/snakepit.spec',
                      '<file>': 'src/unittest/testdata/package_from_devpi.yaml'}
+
+    def tearDown(self):
+        if os.path.exists(self.args['--output']):
+            os.remove(self.args['--output'])
 
     def test_add_conda_dist_flavour_prefix(self):
         input_ = {'conda_dist_flavour': 'miniconda'}
@@ -31,34 +36,41 @@ class TestSnakepit(unittest2.TestCase):
         main(self.args)
         with open(self.args['--output'], "r") as fp:
             lines = fp.read()
-        self.assertIn("package\n", lines)
-        # os.remove(args['--output'])
+        result = re.search(r'pip install([\w -.=:/"]*) (?P<packagename>\w+)\n',
+                           lines)
+        self.assertEquals('my_package', result.group('packagename'))
 
     def test_main__ok_devpi_with_pypi_version_latest_and_miniconda(self):
         self.args['<file>'] = 'src/unittest/testdata/lastest_pkg_devpi.yaml'
         main(self.args)
         with open(self.args['--output'], "r") as fp:
             lines = fp.read()
-        self.assertIn("package\n", lines)
-        # os.remove(args['--output'])
+        result = re.search(r'pip install([\w -.=:/"]*) (?P<packagename>\w+)\n',
+                           lines)
+        self.assertEquals('my_package', result.group('packagename'))
 
     def test_main__ok_devpi_with_pypi_version_and_pyrun(self):
         self.args['--distribution'] = 'pyrun'
         main(self.args)
         with open(self.args['--output'], "r") as fp:
             lines = fp.read()
-        self.assertIn("package==1.0\n", lines)
-        # os.remove(args['--output'])
+        result = re.search(
+                r'pip install([\w -.=:/"]*) (?P<packagename>\w+)==(?P<version>\d.+)\n',
+                lines)
+        self.assertEquals('my_package', result.group('packagename'))
+        self.assertEquals('1.0', result.group('version'))
 
     def test_main__ok_devpi_with_pypi_version_and_miniconda(self):
-        self.args['<file>'] = 'src/unittest/testdata/package_from_devpi.yaml'
         main(self.args)
         with open(self.args['--output'], "r") as fp:
             lines = fp.read()
         self.assertIn("package==1.0\n", lines)
-        # os.remove(args['--output'])
+        result = re.search(
+                r'pip install([\w -.=:/"]*) (?P<packagename>\w+)==(?P<version>\d.+)\n',
+                lines)
+        self.assertEquals('my_package', result.group('packagename'))
+        self.assertEquals('1.0', result.group('version'))
 
-    # @unittest2.skipif(True, 'Under Development')
     @requests_mock.Mocker()
     def test_main__ok_pypi_with_pypi_json(self, mocker):
         response = '{"info": {"version": "1.0", "summary": ' \
@@ -71,5 +83,8 @@ class TestSnakepit(unittest2.TestCase):
         main(self.args)
         with open(self.args['--output'], "r") as fp:
             lines = fp.read()
-        self.assertIn("package==1.0\n", lines)
-        # os.remove(args['--output'])
+        result = re.search(
+                r'pip install([\w -.=:/"]*) (?P<packagename>\w+)==(?P<version>\d.+)\n',
+                lines)
+        self.assertEquals('my_package', result.group('packagename'))
+        self.assertEquals('1.0', result.group('version'))
