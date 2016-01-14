@@ -30,25 +30,6 @@ class TestSnakepit(unittest2.TestCase):
         output_filename = custom_output_filename("package.spec", "/some/where")
         self.assertEqual(output_filename, "/some/where/package.spec")
 
-    def test_main__ok_devpi_with_pypi_version_latest_and_pyrun(self):
-        self.args['--distribution'] = 'pyrun'
-        self.args['<file>'] = 'src/unittest/testdata/lastest_pkg_devpi.yaml'
-        main(self.args)
-        with open(self.args['--output'], "r") as fp:
-            lines = fp.read()
-        result = re.search(r'pip install([\w -.=:/"]*) (?P<packagename>\w+)\n',
-                           lines)
-        self.assertEquals('my_package', result.group('packagename'))
-
-    def test_main__ok_devpi_with_pypi_version_latest_and_miniconda(self):
-        self.args['<file>'] = 'src/unittest/testdata/lastest_pkg_devpi.yaml'
-        main(self.args)
-        with open(self.args['--output'], "r") as fp:
-            lines = fp.read()
-        result = re.search(r'pip install([\w -.=:/"]*) (?P<packagename>\w+)\n',
-                           lines)
-        self.assertEquals('my_package', result.group('packagename'))
-
     def test_main__ok_devpi_with_pypi_version_and_pyrun(self):
         self.args['--distribution'] = 'pyrun'
         main(self.args)

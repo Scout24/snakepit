@@ -38,7 +38,7 @@ cd pip && %{buildroot}/opt/{{ pypi_package_name }}/bin/{{ interpreter }} setup.p
 # change to BuildRoot
 cd %{buildroot}
 # use pip to install {{ pypi_package_name }}
-opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} --no-compile --global-option build_scripts --global-option "--executable=/opt/{{ pypi_package_name }}/bin/python" {{ pypi_package_name }}{{ '==%s' % pypi_package_version if pypi_package_version != 'latest' else ''}}
+opt/{{ pypi_package_name }}/bin/pip install {{ extra_pip_args }} --no-compile --global-option build_scripts --global-option "--executable=/opt/{{ pypi_package_name }}/bin/python" {{ pypi_package_name }}=={{ pypi_package_version }}
 #cleanup
 opt/{{ pypi_package_name }}/bin/pip uninstall pip setuptools -y --disable-pip-version-check
 

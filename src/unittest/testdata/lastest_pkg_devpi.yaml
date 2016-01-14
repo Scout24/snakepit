@@ -1,9 +1,0 @@
-# Name of the top-level product
-pypi_package_name: my_package
-# URL of pypi
-extra_pip_args: --index https://mypypi
-pypi_package_version: latest
-pypi_package_summary: my summary
-pypi_package_license: Public
-# Any entry-points that should be symlinked
-symlinks: ['my_package']
