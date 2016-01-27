@@ -164,6 +164,19 @@ specific language governing permissions and limitations under the License.
 * Decide if it should be '--build' or '--release'
 * If no file specified, it should look for a `snakepit.yaml` or `.snakepit.yaml`
 
+### Automatic Mode
+
+The idea is to have a one-step conversion from any Pypi software to an RPM package.
+* Automatic choices where possible, e.g. for the Python interpreter, symlinks for bin/* files etc.
+* Naming conventions:
+** RPM Name = Pypi name
+** RPM Version = Pypi version
+** RPM Release = Build Nr, Python Interpreter Version etc.
+** RPM Licence = Licence from PyPI
+** RPM Summary = First line of Package description from PyPi
+** RPM Description = Full description from PyPi + Metadatasection at the end
+** RPM Packager = logged in user + snakepit 
+
 ### Miscellaneoous
 
 * Consider "snakepyt" as name
