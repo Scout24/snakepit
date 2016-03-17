@@ -19,12 +19,8 @@ can install things into it.
 %build
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}/opt/
 
 %files
-%defattr(-,root,root,777)
-%dir /opt
 
-%clean
-%{__rm} -rf %{buildroot}
+%post
+chmod 1777 /opt
