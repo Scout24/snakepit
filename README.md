@@ -2,6 +2,8 @@
 
 # snakepit
 
+# This project is DEPRECATED and not any longer supported
+
 ## Description
 
 Package Python software as an RPM including all dependencies (even the
